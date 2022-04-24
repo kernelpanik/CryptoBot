@@ -54,11 +54,10 @@ class UpdateWalletAssetView(CreateView):
             free = row['free']
             locked = row['locked']
             ownusdt = row['ownusdt']
-          #  ownbtc = row['ownbtc']
+            ownbtc = row['ownbtc']
             WalletAssetList.objects.update_or_create( \
                             defaults={'free': free, 'locked': locked, \
-                          #  'ownusdt': ownusdt, 'ownbtc': ownbtc}, \
-                             'ownusdt': ownusdt}, \
+                            'ownusdt': ownusdt, 'ownbtc': ownbtc}, \
                             asset=asset )
         return redirect(reverse('WalletView'))                      
 

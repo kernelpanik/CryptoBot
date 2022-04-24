@@ -33,10 +33,10 @@
                   <tr>
                      <th scope="row">{{ forloop.counter }} </th>
                      <td>{{ x.asset }}</td>
-                     <td>{{ x.free }}</td>
-                     <td>{{ x.locked }}</td>
-                     <td>{{ x.ownbtc }}</td>
-                     <td>{{ x.ownusdt }}</td>
+                     <td>{{ x.free.normalize }}</td>
+                     <td>{{ x.locked.normalize }}</td>
+                     <td>{{ x.ownbtc.normalize }}</td>
+                     <td>{{ x.ownusdt.normalize }}</td>
                   </tr>
                   {% endfor %}
                </tbody>

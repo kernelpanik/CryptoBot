@@ -35,8 +35,12 @@ def get_wallet_assets(info):
         df = df_assets.loc[df_assets['asset'] == asset]
         asset_quantity = float(df["free"]) + float(df["locked"])  
         if asset == "BTC":
-            sum_usdt += asset_quantity * float(current_btc_price_USD) 
+            sum_usdt += asset_quantity * float(current_btc_price_USD)
+            btc_value = asset_quantity * float(current_btc_price_USD)
+            own_btc_list.append(btc_value)
         else:
+            btc_value = 0.0
+            own_btc_list.append(btc_value)
             try:
                 _price = client.get_symbol_ticker(symbol=asset + "USDT")
                 sum_usdt += asset_quantity * float(_price["price"])
@@ -50,6 +54,7 @@ def get_wallet_assets(info):
         own_usdt = sum_usdt
     # df_assets["own_btc"] = pd.Series(own_btc_list)
     df_assets['ownusdt'] = own_usdt_list
+    df_assets['ownbtc'] = own_btc_list
     print(df_assets)
     return df_assets
 
