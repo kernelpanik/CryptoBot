@@ -50,8 +50,8 @@ class WalletAssetList(models.Model):
     asset =  models.CharField(max_length=15)
     free = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
     locked = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
-    own_usdt = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
-    own_btc = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+    ownusdt = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+    ownbtc = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
 
     def __str__(self):
         return self.asset

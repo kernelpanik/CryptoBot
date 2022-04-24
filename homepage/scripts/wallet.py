@@ -40,14 +40,16 @@ def get_wallet_assets(info):
             try:
                 _price = client.get_symbol_ticker(symbol=asset + "USDT")
                 sum_usdt += asset_quantity * float(_price["price"])
+                usdt_value =  asset_quantity * float(_price["price"])
+                own_usdt_list.append(usdt_value)
             except BinanceAPIException:
+                usdt_value = 0.0
+                own_usdt_list.append(usdt_value)
                 continue
         own_btc = sum_usdt / float(current_btc_price_USD)
-        own_btc_list.append(own_btc)
         own_usdt = sum_usdt
-        own_usdt_list.append(own_usdt)
-    df_assets["own_btc"] = pd.Series(own_btc_list)
-    df_assets["own_usdt"] = pd.Series(own_usdt_list)
+    # df_assets["own_btc"] = pd.Series(own_btc_list)
+    df_assets['ownusdt'] = own_usdt_list
     print(df_assets)
     return df_assets
 

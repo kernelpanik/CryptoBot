@@ -89,7 +89,7 @@ class UpdateWalletAsset(forms.ModelForm):
     class Meta:
         model = WalletAssetList
         label = "asset"
-        fields = ["asset", "free", "locked", "own_btc", "own_usdt"]
+        fields = ["asset", "free", "locked", "ownusdt", "ownbtc"]
 
     def __init__(self, *args, **kwargs):
         super(UpdateWalletAsset, self).__init__(*args, **kwargs)
