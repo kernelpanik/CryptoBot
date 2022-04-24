@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid" style="margin-top:80px">
+   <h2 class="text-center">Wallet. . . 
+      <small class="text-muted">   a simple summary</small>
+   </h2>
+   <div class="row ">
+      <div class="col col-sm-4">
+         <div class="row align-items-center overflow-auto" style="margin-top:30px; max-height: 40%">
+            <div class="col col-sm-2">
+               <h3 class="pull-left"><b>Assets</b></h3>
+            </div>
+            <div class="col col-sm-10 ">
+               <form method="POST" action={% url 'UpdateWalletAsset' %}>
+               {% csrf_token %}
+               <button type="submit" id="assetlist"  name="assetlist" class="btn btn-primary btn-sm float-end">Update Asset</button>
+               </form>
+            </div>
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th scope="col">#</th>
+                     <th scope="col">Asset</th>
+                     <th scope="col">Free</th>
+                     <th scope="col">Locked</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for x in wallet_asset %}
+                  <tr>
+                     <th scope="row">{{ forloop.counter }} </th>
+                     <td>{{ x.asset }}</td>
+                     <td>{{ x.free }}</td>
+                     <td>{{ x.locked }}</td>
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock content %}

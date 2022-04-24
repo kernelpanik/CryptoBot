@@ -1,0 +1,22 @@
+{% extends 'homepage.html' %}
+
+{% block coin_list %}
+
+<table class="table table-hover">
+  <thead>
+    <tr class="d-flex col-3">
+      <th class="col-3" scope="col">Coin list</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for coin in object_list %}
+    <tr>
+        <td>{{ coin }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock coin_list %}
