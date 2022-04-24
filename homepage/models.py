@@ -58,10 +58,4 @@ class WalletAssetList(models.Model):
 
 
 
-class WalletAssetBalance(models.Model):
-    time = models.TimeField(auto_now=True)
-    own_usdt = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
-    own_btc = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
-
-    def __str__(self):
-        return self.time        
+      

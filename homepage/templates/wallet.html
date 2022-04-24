@@ -24,6 +24,8 @@
                      <th scope="col">Asset</th>
                      <th scope="col">Free</th>
                      <th scope="col">Locked</th>
+                     <th scope="col">BTC</th>
+                     <th scope="col">USDT</th>
                   </tr>
                </thead>
                <tbody>
@@ -33,6 +35,8 @@
                      <td>{{ x.asset }}</td>
                      <td>{{ x.free }}</td>
                      <td>{{ x.locked }}</td>
+                     <td>{{ x.own_btc }}</td>
+                     <td>{{ x.own_usdt }}</td>
                   </tr>
                   {% endfor %}
                </tbody>

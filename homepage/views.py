@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView, CreateView, DetailView
-from .models import CoinList, BinanceSymbolList, Wallet, WalletAssetList, WalletAssetBalance
-from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance
+from .models import CoinList, BinanceSymbolList, Wallet, WalletAssetList
+from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset
 from .scripts.binance_client import get_binance_symbol
 from .scripts.wallet import get_spot_balance, get_wallet_assets, info
 
