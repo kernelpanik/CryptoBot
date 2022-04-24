@@ -46,6 +46,7 @@ class Wallet(models.Model):
         return self.asset
 
 class WalletAssetList(models.Model):
+    time = models.TimeField(auto_now=True)
     asset =  models.CharField(max_length=15)
     free = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
     locked = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
@@ -54,3 +55,13 @@ class WalletAssetList(models.Model):
 
     def __str__(self):
         return self.asset
+
+
+
+class WalletAssetBalance(models.Model):
+    time = models.TimeField(auto_now=True)
+    own_usdt = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+    own_btc = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+
+    def __str__(self):
+        return self.time        
