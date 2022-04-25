@@ -48,7 +48,7 @@ class UpdateWalletAssetView(CreateView):
     def post(self, request, **kwargs):
         form = self.form_class(request.POST)
         show_text = True
-        asset_list, own_usdt = get_wallet_assets(info)
+        asset_list, own_usdt, own_btc = get_wallet_assets(info)
         for index, row in asset_list.iterrows():
             asset = row['asset']
             free = row['free']
@@ -59,7 +59,7 @@ class UpdateWalletAssetView(CreateView):
                             defaults={'free': free, 'locked': locked, \
                             'ownusdt': ownusdt, 'ownbtc': ownbtc}, \
                             asset=asset )
-        WalletAssetBalance.objects.create(usdtbalance = own_usdt)                    
+        WalletAssetBalance.objects.create(usdtbalance = own_usdt, btcbalance = own_btc)                    
         return redirect(reverse('WalletView'))                      
 
         # return render(

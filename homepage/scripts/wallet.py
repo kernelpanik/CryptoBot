@@ -56,7 +56,7 @@ def get_wallet_assets(info):
     df_assets['ownusdt'] = own_usdt_list
     df_assets['ownbtc'] = own_btc_list
     print(df_assets)
-    return df_assets, own_usdt
+    return df_assets, own_usdt, own_btc
 
 
 # df_assets = get_wallet_assets(info)
