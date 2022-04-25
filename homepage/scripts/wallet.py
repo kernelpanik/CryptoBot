@@ -58,29 +58,7 @@ def get_wallet_assets(info):
     return df_assets, own_usdt, own_btc
 
 
-# df_assets = get_wallet_assets(info)
 
-def get_spot_balance(info, df_assets):
-        sum_usdt = 0.0
-        current_btc_price_USD = client.get_symbol_ticker(symbol="BTCUSDT")["price"]
-        for asset in df_assets['asset']:
-            df = df_assets.loc[df_assets['asset'] == asset]
-            asset_quantity = float(df["free"]) + float(df["locked"])  
-            if asset == "BTC":
-                sum_usdt += asset_quantity * float(current_btc_price_USD) 
-            else:
-                try:
-                    _price = client.get_symbol_ticker(symbol=asset + "USDT")
-                    sum_usdt += asset_quantity * float(_price["price"])
-                except BinanceAPIException:
-                    continue
-#                    print("Coppia di crypto non trovata")
-        own_btc = sum_usdt / float(current_btc_price_USD)
-        own_usdt = sum_usdt
-#        print(" * Spot => %.4f USDT == " % sum_usdt, end="")
-#        print("%.8f BTC" % own_btc)
-        #return own_usdt, own_btc
-        return own_usdt
 
 
 
