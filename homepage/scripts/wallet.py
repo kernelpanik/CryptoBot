@@ -50,13 +50,13 @@ def get_wallet_assets(info):
                 usdt_value = 0.0
                 own_usdt_list.append(usdt_value)
                 continue
-        own_btc = sum_usdt / float(current_btc_price_USD)
-        own_usdt = sum_usdt
+    own_btc = sum_usdt / float(current_btc_price_USD)
+    own_usdt = sum_usdt
     # df_assets["own_btc"] = pd.Series(own_btc_list)
     df_assets['ownusdt'] = own_usdt_list
     df_assets['ownbtc'] = own_btc_list
     print(df_assets)
-    return df_assets
+    return df_assets, own_usdt
 
 
 # df_assets = get_wallet_assets(info)

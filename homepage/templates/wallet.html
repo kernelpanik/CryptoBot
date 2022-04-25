@@ -47,6 +47,13 @@
          <div class="row align-items-center overflow-auto" style="margin-top:30px; max-height: 40%">
             <div class="col col-sm-2">
                <h3 class="pull-left"><b>Balance</b></h3>
+               {% for x in wallet_balance %}
+               <tr>
+                  <th scope="row">{{ forloop.counter }} </th>
+                  <td>{{ x.usdtbalance }}</td>
+                  <td>{{ x.btcbalance }}</td>
+               </tr>
+               {% endfor %}
             </div>
       </div>
    </div>

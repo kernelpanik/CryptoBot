@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView, CreateView, DetailView
-from .models import CoinList, BinanceSymbolList, Wallet, WalletAssetList
-from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset
+from .models import CoinList, BinanceSymbolList, Wallet, WalletAssetList, WalletAssetBalance
+from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance
 from .scripts.binance_client import get_binance_symbol
 from .scripts.wallet import get_spot_balance, get_wallet_assets, info
 
@@ -31,8 +31,8 @@ class WalletView(ListView):
     def get(self, request, *args, **kwargs):
         #wallet_asset = WalletAssetList.objects.values_list('name','free','locked')
         wallet_asset = WalletAssetList.objects.all()
-        print(wallet_asset)
-        context = {"wallet_asset": wallet_asset}
+        wallet_balance = WalletAssetBalance.objects.all()
+        context = {"wallet_asset": wallet_asset, "wallet_balance": wallet_balance}
         return render(request, self.template_name, context)
  
 
@@ -48,7 +48,7 @@ class UpdateWalletAssetView(CreateView):
     def post(self, request, **kwargs):
         form = self.form_class(request.POST)
         show_text = True
-        asset_list = get_wallet_assets(info)
+        asset_list, own_usdt = get_wallet_assets(info)
         for index, row in asset_list.iterrows():
             asset = row['asset']
             free = row['free']
@@ -59,6 +59,7 @@ class UpdateWalletAssetView(CreateView):
                             defaults={'free': free, 'locked': locked, \
                             'ownusdt': ownusdt, 'ownbtc': ownbtc}, \
                             asset=asset )
+        WalletAssetBalance.objects.create(usdtbalance = own_usdt)                    
         return redirect(reverse('WalletView'))                      
 
         # return render(
