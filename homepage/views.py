@@ -29,7 +29,6 @@ class WalletView(ListView):
     #     return spot_balance
 
     def get(self, request, *args, **kwargs):
-        #wallet_asset = WalletAssetList.objects.values_list('name','free','locked')
         wallet_asset = WalletAssetList.objects.all()
         wallet_balance = WalletAssetBalance.objects.all()
         context = {"wallet_asset": wallet_asset, "wallet_balance": wallet_balance}
