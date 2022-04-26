@@ -9,6 +9,7 @@ python-binance = "*"
 pandas = "*"
 python-dotenv = "*"
 pandas-ta = "==0.3.14b0"
+daphne = "*"
 
 [dev-packages]
 autopep8 = "*"
