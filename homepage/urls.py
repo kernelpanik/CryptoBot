@@ -6,7 +6,8 @@ from .views import (
     CoinListDelView,
     UpdateBinanceSymbolView,
     WalletView,
-    UpdateWalletAssetView
+    UpdateWalletAssetView,
+    UpdateCryptoBotSettingsView
 )
 
 
@@ -20,4 +21,5 @@ urlpatterns = [
     path("Coin/del.html", CoinListDelView.as_view(), name="CoinListDel"),
     path("Coin/UpdateBinanceSymbol/", UpdateBinanceSymbolView.as_view(), name="UpdateBinanceSymbol"),
     path("Wallet/Update_Asset/", UpdateWalletAssetView.as_view(), name="UpdateWalletAsset"),
+    path("settings", UpdateCryptoBotSettingsView.as_view(), name="UpdateCryptoBotSettings"),
 ]

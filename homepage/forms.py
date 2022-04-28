@@ -1,5 +1,5 @@
 from django import forms
-from .models import CoinList, BinanceSymbolList, WalletAssetList, WalletAssetBalance
+from .models import CoinList, BinanceSymbolList, WalletAssetList, WalletAssetBalance, CryptoBotSettings
 
 
 
@@ -102,3 +102,15 @@ class UpdateWalletBalance(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(UpdateWalletBalance, self).__init__(*args, **kwargs)
+
+
+
+
+
+class UpdateCryptoBotSettings(forms.ModelForm):
+    class Meta:
+        model = CryptoBotSettings
+        fields = ["api_key", "api_secret", "SECRET_KEY"]
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateCryptoBotSettings, self).__init__(*args, **kwargs)        

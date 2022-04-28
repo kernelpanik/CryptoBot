@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView, CreateView, DetailView
-from .models import CoinList, BinanceSymbolList, Wallet, WalletAssetList, WalletAssetBalance
-from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance
+from .models import CoinList, BinanceSymbolList, Wallet, WalletAssetList, WalletAssetBalance, CryptoBotSettings
+from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance, UpdateCryptoBotSettings
 from .scripts.binance_client import get_binance_symbol
 from .scripts.wallet import get_wallet_assets, info
 
@@ -194,3 +194,11 @@ class CoinListDelView(CreateView):
             return render(
                 request, self.template_name, {"form": form, "show_text": show_text}
             )
+
+
+
+
+class UpdateCryptoBotSettingsView(CreateView):
+    model = CryptoBotSettings
+    form_class = UpdateCryptoBotSettings
+    template_name = "settings.html"
