@@ -38,8 +38,7 @@ class BinanceSymbolList(models.Model):
 class Wallet(models.Model):
     asset =  models.CharField(max_length=15)
     spot_balance = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
-    savings_balance = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
-    staking_balance = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
+
 
 
     def __str__(self):

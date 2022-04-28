@@ -20,7 +20,7 @@ client = Client(api_key, api_secret)
 info = client.get_account()
 
 
-# get all crpyto in wallet, sarebbe da suddividere tra spot e stacking
+# get spot, savings, and staking ( to fix staking )
 def get_wallet_assets(info):
     own_btc_list = []
     own_usdt_list = []
