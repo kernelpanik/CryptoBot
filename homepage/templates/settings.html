@@ -5,16 +5,14 @@
 
 <div class="container mt-3">
     <h3>Settings page</h3>
-    <form method="POST" action={% url 'homepage' %}>
+    <form method="POST" action={% url 'UpdateCryptoBotSettings' %}>
       <div class="mb-3 mt-3">
-        
-        <!-- <label for="api_key">Api key:</label>
+        <label for="api_key">Api key:</label>
+        <input type="text" class="form-control" id="api_key" name="api_key" required>
         <label for="api_secret">Api secret:</label>
+        <input type="text" class="form-control" id="api_secret" name="api_secret" required>
         <label for="SECRET_KEY">Django SECRET_KEY:</label>
-        <input type="text" class="form-control"  required> -->
-        <p>Api key: <input type="text" name="api_key" required></p>
-        <p>Api secret: <input type="text" name="api_secret" required></p>
-        <p>Django SECRET_KEY: <input type="text" name="SECRET_KEY" required></p>
+        <input type="text" class="form-control" id="SECRET_KEY" name="SECRET_KEY" required>
         {% csrf_token %}
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>

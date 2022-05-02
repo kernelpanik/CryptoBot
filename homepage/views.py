@@ -202,3 +202,24 @@ class UpdateCryptoBotSettingsView(CreateView):
     model = CryptoBotSettings
     form_class = UpdateCryptoBotSettings
     template_name = "settings.html"
+
+
+
+
+    def post(self, request, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # coin = ""
+            form.save()
+            # cryptodel = CryptoList.objects.get(crypto_pair="SDSD")
+            # cryptodel.delete()
+            show_text = True
+            #    return HttpResponseRedirect(reverse_lazy("AddCryptoListView"))
+            return render(
+                request, self.template_name, {"form": form, "show_text": show_text}
+            )
+        else:
+            show_text = False
+            return render(
+                request, self.template_name, {"form": form, "show_text": show_text}
+            )    
