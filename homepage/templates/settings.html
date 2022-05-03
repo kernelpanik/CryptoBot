@@ -25,4 +25,13 @@
     <h3>Current settings</h3>
   </div>
 
+
+
+  {% if show_text %}
+    <div class="alert alert-success alert-dismissible fade show container">
+      <strong>Success!</strong> Settings saved successfully.
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+  {% endif %}
+
 {% endblock bot_settings %}

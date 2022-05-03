@@ -115,13 +115,11 @@ class UpdateCryptoBotSettings(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(UpdateCryptoBotSettings, self).__init__(*args, **kwargs)
 
-
-
     def clean(self):
         if CryptoBotSettings.objects.exists():
+            print("here")
             raise forms.ValidationError('You cannot add more somethings.')
-        else:
-            return super(UpdateCryptoBotSettings, self).clean()   
-        # return super(UpdateCryptoBotSettings, self).clean()      
+#        return super(UpdateCryptoBotSettings, self).clean()
+    
 
 
