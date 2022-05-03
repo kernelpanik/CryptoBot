@@ -67,3 +67,5 @@ class CryptoBotSettings(models.Model):
     api_key = models.CharField(max_length=100)
     api_secret = models.CharField(max_length=100)
     SECRET_KEY = models.CharField(max_length=100)
+
+

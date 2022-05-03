@@ -113,4 +113,15 @@ class UpdateCryptoBotSettings(forms.ModelForm):
         fields = ["api_key", "api_secret", "SECRET_KEY"]
 
     def __init__(self, *args, **kwargs):
-        super(UpdateCryptoBotSettings, self).__init__(*args, **kwargs)        
+        super(UpdateCryptoBotSettings, self).__init__(*args, **kwargs)
+
+
+
+    def clean(self):
+        if CryptoBotSettings.objects.exists():
+            raise forms.ValidationError('You cannot add more somethings.')
+        else:
+            raise forms.ValidationError('test')   
+        return super(UpdateCryptoBotSettings, self).clean()      
+
+
