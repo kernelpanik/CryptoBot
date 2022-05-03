@@ -121,7 +121,7 @@ class UpdateCryptoBotSettings(forms.ModelForm):
         if CryptoBotSettings.objects.exists():
             raise forms.ValidationError('You cannot add more somethings.')
         else:
-            raise forms.ValidationError('test')   
-        return super(UpdateCryptoBotSettings, self).clean()      
+            return super(UpdateCryptoBotSettings, self).clean()   
+        # return super(UpdateCryptoBotSettings, self).clean()      
 
 
