@@ -97,7 +97,6 @@ class CoinListAdd(CreateView):
     model = BinanceSymbolList
     form_class = CoinListAdd
     template_name = "add.html"
-    # queryset = BinanceSymbolList.objects.all()
 
     def get_context_data(self, *args, **kwargs):
         symbol =  BinanceSymbolList.objects.values_list('symbol', flat=True)

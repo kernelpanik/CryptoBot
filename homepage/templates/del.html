@@ -18,6 +18,25 @@
   <br>
   <br>
 
+  <script>
+    $(function() {
+      var selectedCoin = [
+      "{% for name in coin %}",
+        "{{name}}",
+       "{% endfor %}" 
+               
+      ];
+      $( "#coin" ).autocomplete({
+        source: selectedCoin,
+        autoFocus:true
+      });
+    } );
+    </script>
+
+
+
+
+
 {% if show_text %}
   <div class="alert alert-success alert-dismissible fade show container">
     <strong>Success!</strong> Cryptocurrency pair {{ request.POST.symbol|upper }} has been deleted successfully.
