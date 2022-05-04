@@ -15,7 +15,8 @@
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>
-
+  <br>
+  <br>
 
 {% if show_text %}
   <div class="alert alert-success alert-dismissible fade show container">
@@ -24,5 +25,14 @@
   </div>
 {% endif %}  
 
+
+{% if form.errors %}
+{% for error in form.non_field_errors %}
+    <div class="alert alert-danger alert-dismissible fade show container">
+        <strong>{{ error|escape }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+{% endfor %}
+{% endif %}
 
 {% endblock coin_del %}
