@@ -61,34 +61,8 @@ class UpdateWalletAssetView(CreateView):
         WalletAssetBalance.objects.create(usdtbalance = own_usdt, btcbalance = own_btc)                    
         return redirect(reverse('WalletView'))                      
 
-        # return render(
-        #     request, 'wallet.html', {"form": form, "show_text": show_text}
-        # )
-        # else:
-        #     new = list(set(asset_list) - set(symbol))
-        # BinanceSymbolList.objects.bulk_create([BinanceSymbolList(symbol=x) for x in new])
-        # if form.is_valid():
-        #     form.save()
-        #     show_text = True
-        #     return render(
-        #         request, self.template_name, {"form": form, "show_text": show_text}
-        #     )
-        # else:
-        #     show_text = False
-        #     return render(
-        #         request, self.template_name, {"form": form, "show_text": show_text}
-        #     )
 
-
-
-
-
-
-
-
-
-
-class CoinList(ListView):
+class CoinListView(ListView):
     model = CoinList
     template_name = "list.html"
 
@@ -120,11 +94,6 @@ class CoinListAdd(CreateView):
             return render(
                 request, self.template_name, {"form": form, "show_text": show_text}
             )
-
-    # def clean(self, request, **kwargs):
-    #     cryptoname = request.POST.get("crypto_pair")
-    #    return HttpResponseRedirect(reverse_lazy("AddCryptoListView"))
-
 
 
 class UpdateBinanceSymbolView(CreateView):
@@ -169,10 +138,14 @@ class UpdateBinanceSymbolView(CreateView):
 class CoinListDelView(CreateView):
     form_class = CoinListDelForm
     template_name = "del.html"
+    model = CoinList
 
+    def get_context_data(self, *args, **kwargs):
+        coin = CoinList.objects.values_list('coin', flat=True)
+        return coin
 
     def get(self, request, *args, **kwargs):
-        coin = CoinListAdd.get_context_data(self)
+        coin = self.get_context_data(**kwargs)
         context = {"form": CoinListDelForm(), "coin": coin}
         return render(request, self.template_name, context)
 

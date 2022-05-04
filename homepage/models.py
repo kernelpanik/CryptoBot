@@ -39,10 +39,9 @@ class Wallet(models.Model):
     asset =  models.CharField(max_length=15)
     spot_balance = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
 
-
-
     def __str__(self):
         return self.asset
+
 
 class WalletAssetList(models.Model):
     time = models.TimeField(auto_now=True)
