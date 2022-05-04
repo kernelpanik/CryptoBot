@@ -19,7 +19,7 @@
 
             
      <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
-    <title>{% block title %}Home-Lab00 CryptoBot{% endblock title %}</title>
+    <title>{% block title %}CryptoBot{% endblock title %}</title>
   </head>
   <body>
 <header>
@@ -30,7 +30,9 @@
 
   <nav id="navbar-top" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">CryptoBot v0.1</a>
+      <a class="navbar-brand" href="/">
+        <img src="{% static 'images/CryptoBot.png' %}" alt="" width="30" height="24" class="d-inline-block align-text-top">
+        CryptoBot v0.1</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
