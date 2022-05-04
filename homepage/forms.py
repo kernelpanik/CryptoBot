@@ -32,13 +32,13 @@ class CoinListAdd(forms.ModelForm):
         if not BinanceSymbolList.objects.filter(symbol=data).exists():
             raise forms.ValidationError(
                     "Coin "
-                    + self.cleaned_data["coin"]
+                    + data
                     + " not found"
                 )
         if CoinList.objects.filter(coin=data).exists():
             raise forms.ValidationError(
                 "Coin "
-                + self.cleaned_data["coin"]
+                + data
                 + " has already been added"
             )
         return super(CoinListAdd, self).clean()
