@@ -8,7 +8,6 @@
       <div class="mb-3 mt-3">
         <label for="coin">Coin name:</label>
         {% csrf_token %}
-        <!-- {{ form }} -->
         <input type="text" class="form-control" id="coin" placeholder="ex. BTCUSDT" name="coin" required>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -80,7 +79,7 @@
   
   {% if show_text %}
     <div class="alert alert-success alert-dismissible fade show container">
-      <strong>Success!</strong> Cryptocurrency pair {{ request.POST.symbol|upper }} has been added successfully.
+      <strong>Success!</strong> Cryptocurrency pair {{ request.POST.coin|upper }} has been added successfully.
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
   {% endif %}
@@ -90,25 +89,24 @@ $(function() {
   var availableSymbol = [
   "{% for name in symbol %}",
     "{{name}}",
-   "{% endfor %}" 
-           
+   "{% endfor %}"          
   ];
   $( "#coin" ).autocomplete({
     source: availableSymbol,
+    minLength: 2,
     autoFocus:true
+    // search: function() {
+    //             //reset every time a search starts.
+    //             $("#coin").val(availableSymbol);
+    //         }
   });
+
+  // setTimeout(function(){
+  //           location.reload();
+  //       },15000);
 } );
+
+
 </script>
-
-
-<!-- <div class="container mt-3">
-  <h3>test</h3>
-  <form method="POST" action={% url 'UpdateBinanceSymbol' %}>
-    <div class="mb-3 mt-3">
-      {% csrf_token %}
-    </div>
-    <button type="submit" id="symbol"  name="symbol" class="btn btn-primary">Submit</button>
-  </form>
-</div> -->
 
 {% endblock coin_add %}
