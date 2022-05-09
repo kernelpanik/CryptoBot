@@ -10,7 +10,7 @@
         
         {% csrf_token %}
         <!-- {{ form }} -->
-        <input type="text" class="form-control" id="delcoin" placeholder="ex. ADAUSDT" name="delcoin" required>
+        <input type="text" class="form-control" id="coin" placeholder="ex. ADAUSDT" name="coin" required>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
@@ -26,7 +26,7 @@
        "{% endfor %}" 
                
       ];
-      $( "#delcoin" ).autocomplete({
+      $( "#coin" ).autocomplete({
         source: selectedCoin,
         autoFocus:true
       });
@@ -39,7 +39,7 @@
 
 {% if show_text %}
   <div class="alert alert-success alert-dismissible fade show container">
-    <strong>Success!</strong> Cryptocurrency pair {{ request.POST.symbol|upper }} has been deleted successfully.
+    <strong>Success!</strong> Cryptocurrency pair {{ request.POST.coin|upper }} has been deleted successfully.
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
   </div>
 {% endif %}  
