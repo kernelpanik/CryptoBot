@@ -204,3 +204,11 @@ def autocompleteAdd(request):
     mylist += [x.symbol for x in queryset]
     return JsonResponse(mylist, safe=False)
 
+def autocompleteDel(request):
+    query_original = request.GET.get('term')
+    queryset = CoinList.objects.filter(coin__icontains=query_original)
+    mylist = []
+    mylist += [x.coin for x in queryset]
+    return JsonResponse(mylist, safe=False)
+
+   
