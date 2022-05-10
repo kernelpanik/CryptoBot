@@ -19,7 +19,7 @@ from .views import (
 
 urlpatterns = [
     path("", HomePageView.as_view(), name="homepage"),
-    path("wallet", WalletView.as_view(), name="WalletView"),
+    path("wallet.html", WalletView.as_view(), name="WalletView"),
     path("Coin/list.html", CoinListView.as_view(), name="CoinList"),
     path("Coin/add.html", CoinListAdd.as_view(), name="CoinListAdd"),
     path("Coin/del.html", CoinListDelView.as_view(), name="CoinListDel"),
