@@ -88,7 +88,7 @@
 <script>
 $(function() {
     $("#coin").autocomplete({
-        source: "{% url 'autocomplete' %}",
+        source: "{% url 'autocompleteAdd' %}",
         minLength: 2,
         autoFocus: true,
     });

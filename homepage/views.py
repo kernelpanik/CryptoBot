@@ -197,7 +197,7 @@ class UpdateCryptoBotSettingsView(CreateView):
 
 
 
-def autocomplete(request):
+def autocompleteAdd(request):
     query_original = request.GET.get('term')
     queryset = BinanceSymbolList.objects.filter(symbol__icontains=query_original)
     mylist = []
