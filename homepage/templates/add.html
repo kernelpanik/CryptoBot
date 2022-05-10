@@ -86,27 +86,12 @@
   {% endif %}
 
 <script>
-     $(function() {
-  //  var availableSymbol = [
-  //  "{% for name in symbol %}",
-  //    "{{name}}",
-  //   "{% endfor %}"  
-  //  ];
-
-
-  //  var availableSymbol = [
-  //  "ADA",
-  //    "BNB",
-  //   "USDT"  
-  //  ];
-
-
-
-   $("#coin").autocomplete({
-     source: "{% url 'autocomplete' %}",
-     minLength: 2,
-     autoFocus:true,
-     });
+$(function() {
+    $("#coin").autocomplete({
+        source: "{% url 'autocomplete' %}",
+        minLength: 2,
+        autoFocus: true,
+    });
 });
 </script>
 

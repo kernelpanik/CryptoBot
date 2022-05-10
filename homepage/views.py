@@ -198,10 +198,6 @@ class UpdateCryptoBotSettingsView(CreateView):
 
 
 def autocomplete(request):
-#    coin = ["ADA", "BNB", "BTCETH", "MANAUSDT"]
-#    return JsonResponse(coin, safe=False)
-#    coin = list(BinanceSymbolList.objects.values_list('symbol', flat=True))
-
     query_original = request.GET.get('term')
     queryset = BinanceSymbolList.objects.filter(symbol__icontains=query_original)
     mylist = []
