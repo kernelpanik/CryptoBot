@@ -5,6 +5,11 @@ from .models import CoinList, BinanceSymbolList, Wallet, WalletAssetList, Wallet
 from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance, UpdateCryptoBotSettings
 from .scripts.binance_client import get_binance_symbol
 from .scripts.wallet import get_wallet_assets, info
+from django.http import JsonResponse
+import json
+from django.core import serializers
+
+
 
 
 # Create your views here.
@@ -188,3 +193,18 @@ class UpdateCryptoBotSettingsView(CreateView):
             return render(
                 request, self.template_name, {"form": form, "show_text": show_text}
             )    
+
+
+
+
+def autocomplete(request):
+#    coin = ["ADA", "BNB", "BTCETH", "MANAUSDT"]
+#    return JsonResponse(coin, safe=False)
+#    coin = list(BinanceSymbolList.objects.values_list('symbol', flat=True))
+
+    query_original = request.GET.get('term')
+    queryset = BinanceSymbolList.objects.filter(symbol__icontains=query_original)
+    mylist = []
+    mylist += [x.symbol for x in queryset]
+    return JsonResponse(mylist, safe=False)
+

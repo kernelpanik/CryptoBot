@@ -4,7 +4,8 @@
 
 <div class="container mt-3">
     <h3>Type to search</h3>
-    <form method="POST" action={% url 'CoinListAdd' %}>
+    <!-- <form method="POST" action={% url 'CoinListAdd' %}> -->
+      <form method="POST" id="coin-form">
       <div class="mb-3 mt-3">
         <label for="coin">Coin name:</label>
         {% csrf_token %}
@@ -85,28 +86,30 @@
   {% endif %}
 
 <script>
-$(function() {
-  var availableSymbol = [
-  "{% for name in symbol %}",
-    "{{name}}",
-   "{% endfor %}"          
-  ];
-  $( "#coin" ).autocomplete({
-    source: availableSymbol,
-    minLength: 2,
-    autoFocus:true
-    // search: function() {
-    //             //reset every time a search starts.
-    //             $("#coin").val(availableSymbol);
-    //         }
-  });
-
-  // setTimeout(function(){
-  //           location.reload();
-  //       },15000);
-} );
+     $(function() {
+  //  var availableSymbol = [
+  //  "{% for name in symbol %}",
+  //    "{{name}}",
+  //   "{% endfor %}"  
+  //  ];
 
 
+  //  var availableSymbol = [
+  //  "ADA",
+  //    "BNB",
+  //   "USDT"  
+  //  ];
+
+
+
+   $("#coin").autocomplete({
+     source: "{% url 'autocomplete' %}",
+     minLength: 2,
+     autoFocus:true,
+     });
+});
 </script>
+
+
 
 {% endblock coin_add %}

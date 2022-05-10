@@ -1,4 +1,6 @@
 from django.urls import path, include
+from . import views
+
 from .views import (
     HomePageView,
     CoinListView,
@@ -7,7 +9,8 @@ from .views import (
     UpdateBinanceSymbolView,
     WalletView,
     UpdateWalletAssetView,
-    UpdateCryptoBotSettingsView
+    UpdateCryptoBotSettingsView,
+    autocomplete
 )
 
 
@@ -22,4 +25,5 @@ urlpatterns = [
     path("Coin/UpdateBinanceSymbol/", UpdateBinanceSymbolView.as_view(), name="UpdateBinanceSymbol"),
     path("Wallet/Update_Asset/", UpdateWalletAssetView.as_view(), name="UpdateWalletAsset"),
     path("settings.html", UpdateCryptoBotSettingsView.as_view(), name="UpdateCryptoBotSettings"),
+    path('autocomplete', views.autocomplete, name='autocomplete'),
 ]
