@@ -10,8 +10,7 @@ from .views import (
     WalletView,
     UpdateWalletAssetView,
     UpdateCryptoBotSettingsView,
-    autocompleteAdd,
-    autocompleteDel
+    autocompleteAdd
 )
 
 
@@ -26,6 +25,5 @@ urlpatterns = [
     path("Coin/UpdateBinanceSymbol/", UpdateBinanceSymbolView.as_view(), name="UpdateBinanceSymbol"),
     path("Wallet/Update_Asset/", UpdateWalletAssetView.as_view(), name="UpdateWalletAsset"),
     path("settings.html", UpdateCryptoBotSettingsView.as_view(), name="UpdateCryptoBotSettings"),
-    path('autocompleteAdd', views.autocompleteAdd, name='autocompleteAdd'),
-    path('autocompleteDel', views.autocompleteDel, name='autocompleteDel'),
+    path('autocompleteAdd', views.autocompleteAdd, name='autocompleteAdd')
 ]

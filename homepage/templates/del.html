@@ -18,13 +18,14 @@
   <br>
   <br>
 
+
   <script>
     $(function() {
       var selectedCoin = [
       "{% for name in coin %}",
         "{{name}}",
        "{% endfor %}" 
-               
+
       ];
       $( "#coin" ).autocomplete({
         source: selectedCoin,
@@ -32,8 +33,6 @@
       });
     } );
     </script>
-
-
 
 
 

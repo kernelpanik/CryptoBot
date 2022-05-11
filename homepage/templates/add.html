@@ -4,7 +4,6 @@
 
 <div class="container mt-3">
     <h3>Type to search</h3>
-    <!-- <form method="POST" action={% url 'CoinListAdd' %}> -->
       <form method="POST" id="coin-form">
       <div class="mb-3 mt-3">
         <label for="coin">Coin name:</label>
@@ -85,15 +84,17 @@
     </div>
   {% endif %}
 
+
+
 <script>
 $(function() {
     $("#coin").autocomplete({
         source: "{% url 'autocompleteAdd' %}",
         minLength: 2,
-        autoFocus: true,
+        autoFocus: true
     });
 });
-</script>
+  </script>
 
 
 
