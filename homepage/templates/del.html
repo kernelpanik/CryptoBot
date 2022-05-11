@@ -20,18 +20,13 @@
 
 
   <script>
-    $(function() {
-      var selectedCoin = [
-      "{% for name in coin %}",
-        "{{name}}",
-       "{% endfor %}" 
-
-      ];
-      $( "#coin" ).autocomplete({
-        source: selectedCoin,
-        autoFocus:true
-      });
-    } );
+$(function() {
+    $("#coin").autocomplete({
+        source: "{% url 'autocompleteDel' %}",
+        minLength: 2,
+        autoFocus: true
+    });
+});
     </script>
 
 
