@@ -1,0 +1,27 @@
+{% extends 'homepage.html' %}
+
+{% block coin_list %}
+<div class="container-fluid" style="margin-top:80px">
+     <div class="col-sm-3 col-12">
+
+
+      <h3 class="text-left">Coin managed by CryptoBot</h3>
+<table class="table table-hover">
+  <thead>
+    <tr class="d-flex">
+      <th class="col-4" scope="col">Coin list</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for coin in object_list %}
+    <tr>
+        <td>{{ coin }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</div>
+</div>
+{% endblock coin_list %}
