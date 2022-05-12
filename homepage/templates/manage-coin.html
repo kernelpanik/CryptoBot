@@ -1,27 +1,38 @@
 {% extends 'homepage.html' %}
-
 {% block coin_list %}
-<div class="container-fluid" style="margin-top:80px">
-     <div class="col-sm-3 col-12">
 
-
+<div class="container-fluid"  style="margin-top:80px">
+<div class="row align-items-start">
+   <div class="col">
       <h3 class="text-left">Coin managed by CryptoBot</h3>
-<table class="table table-hover">
-  <thead>
-    <tr class="d-flex">
-      <th class="col-4" scope="col">Coin list</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    {% for coin in object_list %}
-    <tr>
-        <td>{{ coin }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
-</div>
+      <table class="table table-hover">
+         <thead>
+            <tr class="d-flex">
+               <th class="col-4" scope="col">Coin list</th>
+            </tr>
+         </thead>
+         <tbody>
+            {% for coin in object_list %}
+            <tr>
+               <td>{{ coin }}</td>
+            </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
+   <div class="col">
+      <h3>Add a new coin pair</h3>
+      <form method="POST" id="coin-form">
+         <div class="mb-3 mt-3">
+            <label for="coin">Coin name:</label>
+            {% csrf_token %}
+            <input type="text" class="form-control" id="coin" placeholder="ex. BTCUSDT" name="coin" required>
+         </div>
+         <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+   </div>
+   <div class="col">
+      last column
+   </div>
 </div>
 {% endblock coin_list %}

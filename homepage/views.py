@@ -16,10 +16,42 @@ class HomePageView(TemplateView):
     template_name = "homepage.html"
 
 
+class CoinListView(ListView):
+    model = CoinList
+    template_name = "list.html"
+
+
 class ManageCoinView(ListView):
     model = CoinList
     template_name = "manage-coin.html"
 
+class ManageCoinAddView(CreateView):
+    model = BinanceSymbolList
+    form_class = CoinListAdd
+    template_name = "manage-coin.html"
+
+    def get_context_data(self, *args, **kwargs):
+        symbol =  BinanceSymbolList.objects.values_list('symbol', flat=True)
+        return symbol
+
+    def get(self, request, *args, **kwargs):
+        symbol = self.get_context_data(**kwargs)
+        context = {"form": CoinListAdd(), "symbol": symbol}
+        return render(request, self.template_name, context)
+
+    def post(self, request, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            CoinList = form.save()
+            show_text = True
+            return render(
+                request, self.template_name, {"form": form, "show_text": show_text}
+            )
+        else:
+            show_text = False
+            return render(
+                request, self.template_name, {"form": form, "show_text": show_text}
+            )
 
 
 
@@ -71,9 +103,6 @@ class UpdateWalletAssetView(CreateView):
         return redirect(reverse('WalletView'))                      
 
 
-class CoinListView(ListView):
-    model = CoinList
-    template_name = "list.html"
 
 
 class CoinListAdd(CreateView):
