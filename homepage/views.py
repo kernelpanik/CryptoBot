@@ -9,14 +9,18 @@ from django.http import JsonResponse
 import json
 from django.core import serializers
 
-
-
-
 # Create your views here.
 
 
 class HomePageView(TemplateView):
     template_name = "homepage.html"
+
+
+class ManageCoinView(ListView):
+    model = CoinList
+    template_name = "manage-coin.html"
+
+
 
 
 class WalletView(ListView):
