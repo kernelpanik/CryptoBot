@@ -12,7 +12,7 @@
             </tr>
          </thead>
          <tbody>
-            {% for coin in object_list %}
+            {% for coin in coinlist %}
             <tr>
                <td>{{ coin }}</td>
             </tr>
@@ -22,17 +22,51 @@
    </div>
    <div class="col">
       <h3>Add a new pair</h3>
-      <form method="POST" id="coin-form">
+      <form method="POST" id="coinadd" action="{% url 'ManageCoinAddView' %}">
          <div class="mb-3 mt-3">
             <label for="coin">Coin name:</label>
             {% csrf_token %}
             <input type="text" class="form-control" id="coin" placeholder="ex. BTCUSDT" name="coin" required>
          </div>
-         <button type="submit" class="btn btn-primary">Submit</button>
+         <button type="submit" name="coinadd" class="btn btn-primary">Submit</button>
       </form>
    </div>
    <div class="col">
       last column
    </div>
 </div>
+
+
+{% if form.errors %}
+{% for error in form.non_field_errors %}
+    <div class="alert alert-danger alert-dismissible fade show container">
+        <strong>{{ error|escape }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+{% endfor %}
+{% endif %}
+
+
+{% if show_text %}
+<div class="alert alert-success alert-dismissible fade show container">
+<strong>Success!</strong> Cryptocurrency pair {{ request.POST.coin|upper }} has been added successfully.
+<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+{% endif %}
+
+
+
+<script>
+$(function() {
+$("#coin").autocomplete({
+  source: "{% url 'autocompleteAdd' %}",
+  minLength: 2,
+  autoFocus: true
+});
+});
+</script>
+
+
+
+
 {% endblock coin_list %}

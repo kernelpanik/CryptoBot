@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
-from django.views.generic import TemplateView, ListView, CreateView, DetailView
+from django.views.generic.edit import FormMixin
+from django.views.generic import TemplateView, ListView, CreateView, DetailView, FormView
 from .models import CoinList, BinanceSymbolList, Wallet, WalletAssetList, WalletAssetBalance, CryptoBotSettings
 from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance, UpdateCryptoBotSettings
 from .scripts.binance_client import get_binance_symbol
@@ -25,32 +26,39 @@ class ManageCoinView(ListView):
     model = CoinList
     template_name = "manage-coin.html"
 
+
 class ManageCoinAddView(CreateView):
     model = BinanceSymbolList
     form_class = CoinListAdd
     template_name = "manage-coin.html"
 
-    def get_context_data(self, *args, **kwargs):
-        symbol =  BinanceSymbolList.objects.values_list('symbol', flat=True)
-        return symbol
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        #user = self.request.user
+        context["coinlist"] = CoinListAdd.object.all()
+        return context
 
     def get(self, request, *args, **kwargs):
-        symbol = self.get_context_data(**kwargs)
-        context = {"form": CoinListAdd(), "symbol": symbol}
+        # symbol = self.get_context_data(**kwargs)
+        # context = {"form": CoinListAdd(), "symbol": symbol}
+        # symbol = self.get_context_data(**kwargs)
+        coinlist = CoinList.objects.all()
+        context = {"form": CoinListAdd(), "coinlist" : coinlist}
         return render(request, self.template_name, context)
 
     def post(self, request, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            CoinList = form.save()
+        addform = self.form_class(request.POST)
+        if addform.is_valid():
+            addform.save()
             show_text = True
             return render(
-                request, self.template_name, {"form": form, "show_text": show_text}
+                request, self.template_name, {"addform": addform, "show_text": show_text}
             )
         else:
             show_text = False
             return render(
-                request, self.template_name, {"form": form, "show_text": show_text}
+                request, self.template_name, {"addform": addform, "show_text": show_text}
             )
 
 
