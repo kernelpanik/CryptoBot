@@ -70,7 +70,16 @@
          
       </div>
       <div class="col">
-         last column
+         <h3>Delete a pair</h3>
+         <form method="POST" action={% url 'ManageCoinDelView' %}>
+            <div class="mb-3 mt-3">
+              <label for="coindel">Coin name:</label>
+              
+              {% csrf_token %}
+              <input type="text" class="form-control" id="coindel" placeholder="ex. ADAUSDT" name="coindel" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
       </div>
    </div>
 </div>

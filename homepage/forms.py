@@ -16,19 +16,9 @@ class CoinListAdd(forms.ModelForm):
         super(CoinListAdd, self).__init__(*args, **kwargs)
 
     def clean(self):
-        #matches = ["BUSD", "BTC", "USDT", "ETH", "USDC", "BNB"]
-        # queryset = BinanceSymboList.objects.all()
-        # matches = queryset
         data = self.cleaned_data["coin"]
         if data.islower() or (not data.islower() and not data.isupper()):
             data = data.upper()
-            # self.cleaned_data["coin"] = data
-            # if not any(x in data for x in matches):
-            #     raise forms.ValidationError(
-            #         "Coin "
-            #         + self.cleaned_data["coin"]
-            #         + " not found"
-            #     )
         if not BinanceSymbolList.objects.filter(symbol=data).exists():
             raise forms.ValidationError(
                     "Coin "
@@ -48,25 +38,25 @@ class CoinListAdd(forms.ModelForm):
 class CoinListDelForm(forms.ModelForm):
     class Meta:
         model = CoinList
-        label = "coin"
+        label = "coindel"
         fields = ["coin"]
         widgets = {
-            "coin": forms.TextInput(attrs={"placeholder": "ex. ADAUSDT"}),
+            "coindel": forms.TextInput(attrs={"placeholder": "ex. ADAUSDT"}),
         }
 
     def __init__(self, *args, **kwargs):
         super(CoinListDelForm, self).__init__(*args, **kwargs)
 
     def clean(self):
-        data = self.cleaned_data["coin"]
+        data = self.cleaned_data["coindel"]
         if data.islower() or (not data.islower() and not data.isupper()):
             data = data.upper()
-            self.cleaned_data["coin"] = data
+            self.cleaned_data["coindel"] = data
         if CoinList.objects.filter(coin=data).exists():
             CoinList.objects.filter(coin=data).delete()
         else:
             raise forms.ValidationError(
-                "Cryptocurrency pair " + self.cleaned_data["coin"] + " not found"
+                "Cryptocurrency pair " + self.cleaned_data["coindel"] + " not found"
             )
         return super(CoinListDelForm, self).clean()
 
