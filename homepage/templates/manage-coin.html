@@ -30,6 +30,13 @@
          </div>
          <button type="submit" name="coinadd" class="btn btn-primary">Submit</button>
       </form>
+      <br>
+      {% if show_text %}
+         <div class="alert alert-success alert-dismissible fade show container">
+         <strong>Success!</strong> Cryptocurrency pair {{ request.POST.coin|upper }} has been added successfully.
+         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+         </div>
+      {% endif %}
    </div>
    <div class="col">
       last column
@@ -47,12 +54,7 @@
 {% endif %}
 
 
-{% if show_text %}
-<div class="alert alert-success alert-dismissible fade show container">
-<strong>Success!</strong> Cryptocurrency pair {{ request.POST.coin|upper }} has been added successfully.
-<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-</div>
-{% endif %}
+
 
 
 

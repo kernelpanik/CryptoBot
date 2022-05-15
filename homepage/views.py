@@ -31,34 +31,40 @@ class ManageCoinAddView(CreateView):
     model = BinanceSymbolList
     form_class = CoinListAdd
     template_name = "manage-coin.html"
+    coinlist = []
 
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["coinlist"] = CoinListAdd.object.all()
+        context = super(ManageCoinAddView, self).get_context_data(**kwargs)
+        context["coinlist"] = CoinList.objects.all()
         return context
 
-    def get(self, request, *args, **kwargs):
-        # symbol = self.get_context_data(**kwargs)
-        # context = {"form": CoinListAdd(), "symbol": symbol}
-        # symbol = self.get_context_data(**kwargs)
-        coinlist = CoinList.objects.all()
-        context = {"form": CoinListAdd(), "coinlist" : coinlist}
-        return render(request, self.template_name, context)
+    # def get(self, request, *args, **kwargs):
+    #     # symbol = self.get_context_data(**kwargs)
+    #     # context = {"form": CoinListAdd(), "symbol": symbol}
+    #     # symbol = self.get_context_data(**kwargs)
+
+    #     # coinlist = CoinList.objects.all()
+    #     #context = {"form": CoinListAdd(), "coinlist" : coinlist}
+    #     context = {"form": CoinListAdd()}
+    #     return render(request, self.template_name, context)
 
     def post(self, request, **kwargs):
+        coinlist = CoinList.objects.all()
         addform = self.form_class(request.POST)
         if addform.is_valid():
             addform.save()
             show_text = True
             return render(
-                request, self.template_name, {"addform": addform, "show_text": show_text}
+                request, self.template_name, {"addform": addform, "coinlist": coinlist, "show_text": show_text}
             )
         else:
             show_text = False
             return render(
-                request, self.template_name, {"addform": addform, "show_text": show_text}
+                request, self.template_name, {"addform": addform, "coinlist": coinlist, "show_text": show_text}
             )
+
+
 
 
 
