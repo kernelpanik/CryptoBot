@@ -23,7 +23,7 @@
          <h3>Add a new pair</h3>
          <form method="POST" id="coinadd" action="{% url 'ManageCoinAddView' %}">
             <div class="mb-3 mt-3">
-               <label for="coin">Coin name:</label>
+               <label for="coin">Coin name</label>
                {% csrf_token %}
                <input type="text" class="form-control" id="coin" placeholder="ex. BTCUSDT" name="coin" required>
             </div>
@@ -43,7 +43,32 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
          </div>
          {% endfor %}
+         {% endif %}            
+         <div class="mb-3 mt-3 border text-left">
+            <h5>Binance list</h5>	
+            <p class="text-start text-decoration-underline">The are currently <b>{{ symbolist | length}}</b> listed<br>
+            </p>
+            <form method="POST" action={% url 'UpdateBinanceSymbol' %}>
+               {% csrf_token %} 
+             <button type="submit" id="symbol"  name="symbol" class="btn btn-primary">Update</button>
+             the list
+           </form>
+         </div>
+         {% if list_updated %}
+         <div class="alert  alert-info alert-dismissible fade show container">
+            <strong>Info!</strong> List already updated ;)
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+         </div>
          {% endif %}
+         {% if show_list_text %}
+         <div class="alert alert-success alert-dismissible fade show container">
+            <strong>Success!</strong> List updated successfully
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+         </div>
+         {% endif %}
+
+
+         
       </div>
       <div class="col">
          last column

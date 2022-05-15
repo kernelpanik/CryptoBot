@@ -36,7 +36,11 @@ class ManageCoinAddView(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(ManageCoinAddView, self).get_context_data(**kwargs)
-        context["coinlist"] = CoinList.objects.all()
+        # context["coinlist"] = CoinList.objects.all()
+        context = {
+            'coinlist': CoinList.objects.all(),
+            'symbolist': BinanceSymbolList.objects.all()
+    }
         return context
 
     # def get(self, request, *args, **kwargs):
@@ -55,12 +59,9 @@ class ManageCoinAddView(CreateView):
         if addform.is_valid():
             addform.save()
             show_text = True
-            return render(
-                request, self.template_name, {"addform": addform, "coinlist": coinlist, "show_text": show_text}
-            )
         else:
             show_text = False
-            return render(
+        return render(
                 request, self.template_name, {"addform": addform, "coinlist": coinlist, "show_text": show_text}
             )
 
@@ -150,39 +151,29 @@ class CoinListAdd(CreateView):
 class UpdateBinanceSymbolView(CreateView):
     model = BinanceSymbolList
     form_class = UpdateBnSymbol
-    template_name = "add.html"
-
-    # def get(self, request, *args, **kwargs):
-    #     symbol = self.get_context_data(**kwargs)
-    #     context = {"form": UpdateBinanceSymbolView(), "symbol": symbol}
-    #     return render(request, self.template_name, context)
+    template_name = "manage-coin.html"
 
     def post(self, request, **kwargs):
-
-        form = self.form_class(request.POST)
-        show_text = True
+        coinlist = CoinList.objects.all()
+        symbolist = BinanceSymbolList.objects.all()
         symbol_list = get_binance_symbol()
         symbol_list.sort()
         symbol = CoinListAdd.get_context_data(self)
         symbol = list(symbol)
+        symbol.sort()
         if (symbol_list == symbol):
+            list_updated = True
             return render(
-                request, self.template_name, {"form": form, "show_text": show_text}
+                request, self.template_name, {"list_updated": list_updated, "coinlist": coinlist, "symbolist": symbolist }
             )
         else:
             new = list(set(symbol_list) - set(symbol))
         BinanceSymbolList.objects.bulk_create([BinanceSymbolList(symbol=x) for x in new])
-        if form.is_valid():
-            form.save()
-            show_text = True
-            return render(
-                request, self.template_name, {"form": form, "show_text": show_text}
+        show_list_text = True
+        return render(
+                request, self.template_name, {"show_list_text": show_list_text, "coinlist": coinlist, "symbolist": symbolist}
             )
-        else:
-            show_text = False
-            return render(
-                request, self.template_name, {"form": form, "show_text": show_text}
-            )
+
 
 
 
