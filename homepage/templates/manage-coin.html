@@ -92,4 +92,13 @@
    });
    });
 </script>
+<script>
+   $(function() {
+       $("#coindel").autocomplete({
+           source: "{% url 'autocompleteDel' %}",
+           minLength: 2,
+           autoFocus: true
+       });
+   });
+</script>
 {% endblock coin_list %}
