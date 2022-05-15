@@ -62,6 +62,10 @@ class ManageCoinAddView(CreateView):
                 return render(
                 request, self.template_name, {"delform": delform, "show_text": show_text}
                 )
+            else:
+                return render(
+                request, self.template_name, {"delform": delform, "show_text": show_text}
+                )                
 
 
 
@@ -133,6 +137,8 @@ class UpdateWalletAssetView(CreateView):
         return redirect(reverse('WalletView'))                      
 
 
+
+
 class UpdateBinanceSymbolView(CreateView):
     model = BinanceSymbolList
     form_class = UpdateBnSymbol
@@ -143,7 +149,7 @@ class UpdateBinanceSymbolView(CreateView):
         symbolist = BinanceSymbolList.objects.all()
         symbol_list = get_binance_symbol()
         symbol_list.sort()
-        symbol = CoinListAdd.get_context_data(self)
+        symbol = BinanceSymbolList.objects.values_list('symbol', flat=True)
         symbol = list(symbol)
         symbol.sort()
         if (symbol_list == symbol):

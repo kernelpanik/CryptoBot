@@ -38,25 +38,25 @@ class CoinListAdd(forms.ModelForm):
 class CoinListDelForm(forms.ModelForm):
     class Meta:
         model = CoinList
-        label = "coindel"
+        label = "coin"
         fields = ["coin"]
         widgets = {
-            "coindel": forms.TextInput(attrs={"placeholder": "ex. ADAUSDT"}),
+            "coin": forms.TextInput(attrs={"placeholder": "ex. ADAUSDT"}),
         }
 
     def __init__(self, *args, **kwargs):
         super(CoinListDelForm, self).__init__(*args, **kwargs)
 
     def clean(self):
-        data = self.cleaned_data["coindel"]
+        data = self.cleaned_data["coin"]
         if data.islower() or (not data.islower() and not data.isupper()):
             data = data.upper()
-            self.cleaned_data["coindel"] = data
+            self.cleaned_data["coin"] = data
         if CoinList.objects.filter(coin=data).exists():
             CoinList.objects.filter(coin=data).delete()
         else:
             raise forms.ValidationError(
-                "Cryptocurrency pair " + self.cleaned_data["coindel"] + " not found"
+                "Cryptocurrency pair " + self.cleaned_data["coin"] + " not found"
             )
         return super(CoinListDelForm, self).clean()
 
