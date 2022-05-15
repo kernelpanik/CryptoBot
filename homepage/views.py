@@ -59,12 +59,10 @@ class ManageCoinAddView(CreateView):
             delform = self.form_class(request.POST)
             if delform.is_valid():
                 show_text = True
-                return render(
-                request, self.template_name, {"delform": delform, "show_text": show_text}
-                )
             else:
-                return render(
-                request, self.template_name, {"delform": delform, "show_text": show_text}
+                show_text = False
+            return render(
+                request, self.template_name, {"delform": delform, "show_text": show_text, "coinlist": coinlist, "symbolist": symbolist}
                 )                
 
 
@@ -80,7 +78,14 @@ class ManageCoinDelView(CreateView):
         symbolist = BinanceSymbolList.objects.all()
         delform = self.form_class(request.POST)
         if delform.is_valid():
-            delform.save()
+            # delform.save()
+            return render(
+                request, self.template_name, {"delform": delform, "coinlist": coinlist, "symbolist": symbolist}
+            )
+        else:
+            return render(
+                request, self.template_name, {"delform": delform, "coinlist": coinlist, "symbolist": symbolist}
+            )                
         # symbol_list = get_binance_symbol()
         # symbol_list.sort()
         # symbol = CoinListAdd.get_context_data(self)
@@ -96,7 +101,7 @@ class ManageCoinDelView(CreateView):
         # BinanceSymbolList.objects.bulk_create([BinanceSymbolList(symbol=x) for x in new])
         # show_list_text = True
         return render(
-                request, self.template_name, {"coinlist": coinlist, "symbolist": symbolist}
+                request, self.template_name, {"delform": delform, "coinlist": coinlist, "symbolist": symbolist}
             )    
 
 

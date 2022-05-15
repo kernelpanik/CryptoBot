@@ -71,14 +71,14 @@
       </div>
       <div class="col">
          <h3>Delete a pair</h3>
-         <form method="POST" action={% url 'ManageCoinDelView' %}>
+         <form method="POST" id="coindel" action={% url 'ManageCoinDelView' %}>
             <div class="mb-3 mt-3">
               <label for="coin">Coin name:</label>
               
               {% csrf_token %}
               <input type="text" class="form-control" id="coin" placeholder="ex. ADAUSDT" name="coin" required>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" name="coindel" class="btn btn-primary">Submit</button>
           </form>
       </div>
    </div>
