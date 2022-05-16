@@ -71,12 +71,12 @@
       </div>
       <div class="col">
          <h3>Delete a pair</h3>
-         <form method="POST" id="coindel" action={% url 'ManageCoinDelView' %}>
+         <form method="POST" id="coindelform" action={% url 'ManageCoinDelView' %}>
             <div class="mb-3 mt-3">
-              <label for="coin">Coin name:</label>
+              <label for="coindel">Coin name:</label>
               
               {% csrf_token %}
-              <input type="text" class="form-control" id="coin" placeholder="ex. ADAUSDT" name="coin" required>
+              <input type="text" class="form-control" id="coindel" placeholder="ex. ADAUSDT" name="coindel" required>
             </div>
             <button type="submit" name="coindel" class="btn btn-primary">Submit</button>
           </form>
@@ -90,9 +90,21 @@
      minLength: 2,
      autoFocus: true
    });
+   $( "#coindel" ).autocomplete({
+           source: "{% url 'autocompleteDel' %}",
+           minLength: 2,
+           autoFocus: true
+       });
    });
 </script>
-<script>
+
+
+<div class="ui-widget">
+   <label for="tags">Tags: </label>
+   <input id="tags">
+ </div>
+
+<!-- <script>
    $(function() {
        $("#coindel").autocomplete({
            source: "{% url 'autocompleteDel' %}",
@@ -100,5 +112,5 @@
            autoFocus: true
        });
    });
-</script>
+</script> -->
 {% endblock coin_list %}
