@@ -80,6 +80,13 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
+          <br>
+          {% if show_del_text %}
+          <div class="alert alert-success alert-dismissible fade show container">
+             <strong>Success!</strong> Coin {{ request.POST.coin|upper }} deleted successfully
+             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+          {% endif %}
       </div>
    </div>
 </div>

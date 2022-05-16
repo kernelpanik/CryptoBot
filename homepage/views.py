@@ -55,15 +55,15 @@ class ManageCoinAddView(CreateView):
             return render(
                 request, self.template_name, {"addform": addform, "coinlist": coinlist, "show_text": show_text, "symbolist": symbolist}
                 )
-        elif 'coindel' in request.POST:
-            delform = self.form_class(request.POST)
-            if delform.is_valid():
-                show_text = True
-            else:
-                show_text = False
-            return render(
-                request, self.template_name, {"delform": delform, "show_text": show_text, "coinlist": coinlist, "symbolist": symbolist}
-                )                
+        # elif 'coindel' in request.POST:
+        #     delform = self.form_class(request.POST)
+        #     if delform.is_valid():
+        #         show_text = True
+        #     else:
+        #         show_text = False
+        #     return render(
+        #         request, self.template_name, {"delform": delform, "show_text": show_text, "coinlist": coinlist, "symbolist": symbolist}
+        #         )                
 
 
 
@@ -78,9 +78,10 @@ class ManageCoinDelView(CreateView):
         symbolist = BinanceSymbolList.objects.all()
         delform = self.form_class(request.POST)
         if delform.is_valid():
-            # delform.save()
+            delform.save()
+            show_del_text = True
             return render(
-                request, self.template_name, {"delform": delform, "coinlist": coinlist, "symbolist": symbolist}
+                request, self.template_name, {"delform": delform, "coinlist": coinlist, "symbolist": symbolist, "show_del_text": show_del_text}
             )
         else:
             return render(
