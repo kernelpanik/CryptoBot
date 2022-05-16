@@ -20,7 +20,7 @@
          </table>
       </div>
       <div class="col">
-         <h3>Add a new pair</h3>
+         <h3>Add a pair</h3>
          <form method="POST" id="coinadd" action="{% url 'ManageCoinAddView' %}">
             <div class="mb-3 mt-3">
                <label for="coin">Coin name</label>
@@ -94,7 +94,13 @@
              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           </div>
           {% endfor %}
-          {% endif %}  
+          {% endif %}
+          <div class="mb-3 mt-3 border text-left">
+            <h5>CryptoBot list</h5>	
+            <p class="text-start text-decoration-underline">The are currently <b>{{ coinlist | length}}</b> pair manage by CryptoBot
+            </p>
+            <br>
+         </div>  
       </div>
    </div>
 </div>
