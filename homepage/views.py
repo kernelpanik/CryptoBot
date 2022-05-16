@@ -77,7 +77,6 @@ class ManageCoinDelView(CreateView):
         coinlist = CoinList.objects.all()
         symbolist = BinanceSymbolList.objects.all()
         delform = self.form_class(request.POST)
-        print("here")
         if delform.is_valid():
             # delform.save()
             return render(

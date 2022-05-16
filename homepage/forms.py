@@ -34,6 +34,9 @@ class CoinListAdd(forms.ModelForm):
         return super(CoinListAdd, self).clean()
 
 
+FIELD_NAME_MAPPING = {
+    'coin': 'coindel'
+}
 
 class CoinListDelForm(forms.ModelForm):
     class Meta:
@@ -46,6 +49,12 @@ class CoinListDelForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CoinListDelForm, self).__init__(*args, **kwargs)
+
+    def add_prefix(self, field_name):
+        # look up field name; return original if not found
+        field_name = FIELD_NAME_MAPPING.get(field_name, field_name)
+        print(field_name)
+        return super(CoinListDelForm, self).add_prefix(field_name)    
 
     def clean(self):
         data = self.cleaned_data["coin"]
