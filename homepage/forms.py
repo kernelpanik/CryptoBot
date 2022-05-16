@@ -53,7 +53,6 @@ class CoinListDelForm(forms.ModelForm):
     def add_prefix(self, field_name):
         # look up field name; return original if not found
         field_name = FIELD_NAME_MAPPING.get(field_name, field_name)
-        print(field_name)
         return super(CoinListDelForm, self).add_prefix(field_name)    
 
     def clean(self):

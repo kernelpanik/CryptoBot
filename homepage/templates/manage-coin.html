@@ -87,6 +87,14 @@
              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
           </div>
           {% endif %}
+          {% if delform.errors %}
+          {% for error in delform.non_field_errors %}
+          <div class="alert alert-danger alert-dismissible fade show container">
+             <strong>{{ error|escape }}</strong>
+             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+          {% endfor %}
+          {% endif %}  
       </div>
    </div>
 </div>
