@@ -160,3 +160,9 @@ def autocompleteDel(request):
     mylist += [x.coin for x in queryset]
     return JsonResponse(mylist, safe=False)
    
+
+
+class CryptoDetailView(DetailView):
+    model = CoinList
+    template_name = "detail.html"
+   
