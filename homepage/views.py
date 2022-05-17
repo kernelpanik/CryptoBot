@@ -6,8 +6,6 @@ from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAss
 from .scripts.binance_client import get_binance_symbol
 from .scripts.wallet import get_wallet_assets, info
 from django.http import JsonResponse
-import json
-from django.core import serializers
 
 # Create your views here.
 
