@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
-from django.views.generic.edit import FormMixin
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, FormView
 from .models import CoinList, BinanceSymbolList, Wallet, WalletAssetList, WalletAssetBalance, CryptoBotSettings
 from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance, UpdateCryptoBotSettings
@@ -22,7 +21,6 @@ class ManageCoinAddView(CreateView):
     template_name = "manage-coin.html"
     coinlist = []
 
-
     def get_context_data(self, **kwargs):
         context = super(ManageCoinAddView, self).get_context_data(**kwargs)
         # context["coinlist"] = CoinList.objects.all()
@@ -31,16 +29,6 @@ class ManageCoinAddView(CreateView):
             'symbolist': BinanceSymbolList.objects.all()
     }
         return context
-
-    # def get(self, request, *args, **kwargs):
-    #     # symbol = self.get_context_data(**kwargs)
-    #     # context = {"form": CoinListAdd(), "symbol": symbol}
-    #     # symbol = self.get_context_data(**kwargs)
-
-    #     # coinlist = CoinList.objects.all()
-    #     #context = {"form": CoinListAdd(), "coinlist" : coinlist}
-    #     context = {"form": CoinListAdd()}
-    #     return render(request, self.template_name, context)
 
     def post(self, request, **kwargs):
         symbolist = BinanceSymbolList.objects.all()
@@ -55,17 +43,6 @@ class ManageCoinAddView(CreateView):
             return render(
                 request, self.template_name, {"addform": addform, "coinlist": coinlist, "show_text": show_text, "symbolist": symbolist}
                 )
-        # elif 'coindel' in request.POST:
-        #     delform = self.form_class(request.POST)
-        #     if delform.is_valid():
-        #         show_text = True
-        #     else:
-        #         show_text = False
-        #     return render(
-        #         request, self.template_name, {"delform": delform, "show_text": show_text, "coinlist": coinlist, "symbolist": symbolist}
-        #         )                
-
-
 
 
 class ManageCoinDelView(CreateView):
@@ -87,25 +64,7 @@ class ManageCoinDelView(CreateView):
             return render(
                 request, self.template_name, {"delform": delform, "coinlist": coinlist, "symbolist": symbolist}
             )                
-        # symbol_list = get_binance_symbol()
-        # symbol_list.sort()
-        # symbol = CoinListAdd.get_context_data(self)
-        # symbol = list(symbol)
-        # symbol.sort()
-        # if (symbol_list == symbol):
-        #     list_updated = True
-        #     return render(
-        #         request, self.template_name, {"list_updated": list_updated, "coinlist": coinlist, "symbolist": symbolist }
-        #     )
-        # else:
-        #     new = list(set(symbol_list) - set(symbol))
-        # BinanceSymbolList.objects.bulk_create([BinanceSymbolList(symbol=x) for x in new])
-        # show_list_text = True
-        return render(
-                request, self.template_name, {"delform": delform, "coinlist": coinlist, "symbolist": symbolist}
-            )    
-
-
+  
 
 class WalletView(ListView):
     model = CoinList
@@ -117,8 +76,6 @@ class WalletView(ListView):
         context = {"wallet_asset": wallet_asset, "wallet_balance": wallet_balance}
         return render(request, self.template_name, context)
  
-
-
 
 class UpdateWalletAssetView(CreateView):
     model = WalletAssetList
@@ -141,8 +98,6 @@ class UpdateWalletAssetView(CreateView):
                             asset=asset )
         WalletAssetBalance.objects.create(usdtbalance = own_usdt, btcbalance = own_btc)                    
         return redirect(reverse('WalletView'))                      
-
-
 
 
 class UpdateBinanceSymbolView(CreateView):
@@ -172,43 +127,6 @@ class UpdateBinanceSymbolView(CreateView):
             )
 
 
-
-
-# class CoinListDelView(CreateView):
-#     form_class = CoinListDelForm
-#     template_name = "del.html"
-#     model = CoinList
-
-#     def get_context_data(self, *args, **kwargs):
-#         coin = CoinList.objects.values_list('coin', flat=True)
-#         return coin
-
-#     def get(self, request, *args, **kwargs):
-#         coin = self.get_context_data(**kwargs)
-#         context = {"form": CoinListDelForm(), "coin": coin}
-#         return render(request, self.template_name, context)
-
-#     def post(self, request, **kwargs):
-#         form = self.form_class(request.POST)
-#         if form.is_valid():
-#             # coin = ""
-#             # form.save()
-#             # cryptodel = CryptoList.objects.get(crypto_pair="SDSD")
-#             # cryptodel.delete()
-#             show_text = True
-#             #    return HttpResponseRedirect(reverse_lazy("AddCryptoListView"))
-#             return render(
-#                 request, self.template_name, {"form": form, "show_text": show_text}
-#             )
-#         else:
-#             show_text = False
-#             return render(
-#                 request, self.template_name, {"form": form, "show_text": show_text}
-#             )
-
-
-
-
 class UpdateCryptoBotSettingsView(CreateView):
     model = CryptoBotSettings
     form_class = UpdateCryptoBotSettings
@@ -227,8 +145,6 @@ class UpdateCryptoBotSettingsView(CreateView):
             return render(
                 request, self.template_name, {"form": form, "show_text": show_text}
             )    
-
-
 
 
 def autocompleteAdd(request):
