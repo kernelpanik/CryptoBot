@@ -166,3 +166,12 @@ class CryptoDetailView(DetailView):
     model = CoinList
     template_name = "detail.html"
    
+
+class SearchResultsView(DetailView):
+    model = CoinList
+    template_name = "detail.html"
+
+    def get_queryset(self):  # new
+        query = self.request.GET.get("q")
+        object_list = CoinList.objects.filter(coin__icontains=query)
+        return object_list   
