@@ -167,8 +167,14 @@ class CryptoDetailView(DetailView):
     template_name = "detail.html"
    
 
-def SearchResults(request, slug):
-    topic = CoinList.objects.filter(slug = slug)
-    context = { "topic":topic }
-    return render (request, "dashboard.html/slug", context)
+def SearchResults(request, coin):
+    coin = request.GET.get('q', '')
+    print(coin)
+    print(request.GET)
+    # # coinsearch = CoinList.objects.filter(slug = coin)
+    # context = { "coin":coin }
+    # return render (request, "detail.html", context)
+    coin = "ADABIDR"
+    response = redirect('/dashboard/%s' % coin)
+    return response
  

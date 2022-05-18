@@ -29,6 +29,6 @@ urlpatterns = [
     path('autocompleteAdd', views.autocompleteAdd, name='autocompleteAdd'),
     path('autocompleteDel', views.autocompleteDel, name='autocompleteDel'),
     path("dashboard/<slug:slug>/", CryptoDetailView.as_view(), name="CryptoDetails"),
-    path("dashboard/<slug:coin>/", views.SearchResults, name= "SearchResults")
+    path("search/<str:coin>/", views.SearchResults, name= "SearchResults")
 
 ]
