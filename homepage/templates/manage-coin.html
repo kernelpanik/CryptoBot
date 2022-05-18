@@ -1,5 +1,21 @@
 {% extends 'homepage.html' %}
 {% block coin_list %}
+
+<style>
+   .ui-autocomplete {
+     max-height: 300px;
+     overflow-y: auto;
+     /* prevent horizontal scrollbar */
+     overflow-x: hidden;
+   }
+   /* IE 6 doesn't support max-height
+    * we use height instead, but this forces the menu to always be this tall
+    */
+   * html .ui-autocomplete {
+     height: 300px;
+   }
+   </style>
+
 <div class="container-fluid"  style="margin-top:80px">
    <div class="row align-items-start">
       <div class="col">
