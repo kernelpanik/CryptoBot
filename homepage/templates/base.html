@@ -40,8 +40,8 @@
                         <a class="nav-link" href="{% url 'UpdateCryptoBotSettings' %}" tabindex="-1">Settings</a>
                      </li>
                   </ul>
-                  <form class="d-flex" action="{%url 'SearchResults' coin='ADABIDR'  %}" method="GET">
-                     <input class="form-control me-2" id="search" type="search" placeholder="Search" aria-label="Search">
+                  <form class="d-flex" action="{%url 'SearchResults' search=' '  %}" method="GET">
+                     <input class="form-control me-2" id="search" name="search" type="search" placeholder="Search" aria-label="Search">
                      <button class="btn btn-outline-success" type="submit">Search</button>
                   </form>
                </div>
