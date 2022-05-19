@@ -1,6 +1,13 @@
 {% extends 'homepage.html' %}
 {% block crypto_detail %}
 
+<style>
+.tradingview-widget-container div div {
+   height: 600px !important;
+}
+  </style>
+
+
 <div class="container-fluid" style="margin-top:80px">
     <div class="row align-items-start">
       <div class="col">
@@ -25,7 +32,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-8" style="height: 500px;">
+    <div class="col-8">
       <!-- TradingView Widget BEGIN -->
 <div class="tradingview-widget-container">
   <div id="tradingview_80845"></div>
