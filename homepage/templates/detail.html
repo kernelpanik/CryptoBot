@@ -24,7 +24,7 @@
 
 
 <!-- TradingView Widget BEGIN -->
-<div class="tradingview-widget-container">
+<!-- <div class="tradingview-widget-container">
   <div id="tradingview_80845"></div>
   <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/ADAUSDT/?exchange=BINANCE" rel="noopener" target="_blank"><span class="blue-text">ADAUSDT Chart</span></a> by TradingView</div>
   <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
@@ -50,8 +50,51 @@
 }
   );
   </script>
+</div> -->
+<!-- TradingView Widget END -->
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8">
+      <!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div id="tradingview_80845"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/symbols/ADAUSDT/?exchange=BINANCE" rel="noopener" target="_blank"><span class="blue-text">ADAUSDT Chart</span></a> by TradingView</div>
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+  <script type="text/javascript">
+  new TradingView.widget(
+  {
+  // "width": 980,
+  // "height": 610,
+  "autosize": true,
+  "symbol": "BINANCE:{{ object }}",
+  "interval": "D",
+  "timezone": "Europe/Rome",
+  "theme": "light",
+  "style": "1",
+  "locale": "en",
+  "show_popup_button": true,
+  "popup_width": "1000",
+  "popup_height": "650",
+  "toolbar_bg": "#f1f3f6",
+  "enable_publishing": false,
+  "hide_side_toolbar": false,
+  "save_image": false,
+  "container_id": "tradingview_80845"
+}
+  );
+  </script>
 </div>
 <!-- TradingView Widget END -->
 
+
+
+
+
+    </div>
+    <div class="col-4">col-4</div>
+  </div>
+</div>
 
 {% endblock crypto_detail %}

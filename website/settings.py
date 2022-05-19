@@ -139,6 +139,3 @@ load_dotenv(dotenv_path=env_path)
 api_key = os.getenv("api_key")
 api_secret = os.getenv("api_secret")
 SECRET_KEY = os.getenv("SECRET_KEY")
-
-
-print(api_key)
