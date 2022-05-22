@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "homepage.apps.HomepageConfig",
+    "channels",
 ]
 
 MIDDLEWARE = [
@@ -129,6 +130,17 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 6000
 
+ASGI_APPLICATION = "website.routing.application"
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('localhost', 6379)],
+        },
+        'ROUTING': 'ohlcv.routing.channel_routing',
+    }
+}
 
 load_dotenv()
 env_path = Path('.')/'.env'

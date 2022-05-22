@@ -10,6 +10,8 @@ pandas = "*"
 python-dotenv = "*"
 pandas-ta = "==0.3.14b0"
 daphne = "*"
+channels = "*"
+asgi-redis = "*"
 
 [dev-packages]
 autopep8 = "*"
