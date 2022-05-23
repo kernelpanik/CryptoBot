@@ -1,9 +1,8 @@
-from channels.routing import ProtocolTypeRouter
-from django.core.asgi import get_asgi_application
+from django.urls import re_path
 
+# from . import consumers
+from consumers import OhlcvConsumer
 
-application = ProtocolTypeRouter({
-    # (your routes here)
-     "http": get_asgi_application(),
-    # Just HTTP for now. (We can add other protocols later.)
-})
+websocket_urlpatterns = [
+    re_path(r'ws/ohlcv/$', OhlcvConsumer.as_asgi()),
+]
