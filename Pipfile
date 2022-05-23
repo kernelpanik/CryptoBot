@@ -12,6 +12,7 @@ pandas-ta = "==0.3.14b0"
 daphne = "*"
 channels = "*"
 asgi-redis = "*"
+channels-redis = "*"
 
 [dev-packages]
 autopep8 = "*"
