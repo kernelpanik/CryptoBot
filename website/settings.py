@@ -132,14 +132,7 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 6000
 
 ASGI_APPLICATION = "website.asgi.application"
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [('localhost', 6379)],
-        },
-    }
-}
+
 
 load_dotenv()
 env_path = Path('.')/'.env'
@@ -150,3 +143,14 @@ load_dotenv(dotenv_path=env_path)
 api_key = os.getenv("api_key")
 api_secret = os.getenv("api_secret")
 SECRET_KEY = os.getenv("SECRET_KEY")
+redis_pwd = os.getenv("redis_pwd")
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [(f"redis://:{redis_pwd}@127.0.0.1:6379/0")],
+        },
+    }
+}
