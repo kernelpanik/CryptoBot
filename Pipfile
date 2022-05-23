@@ -4,14 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+Django = "*"
 python-binance = "*"
 pandas = "*"
 python-dotenv = "*"
 pandas-ta = "==0.3.14b0"
 daphne = "*"
 channels = "*"
-asgi-redis = "*"
 channels-redis = "*"
 
 [dev-packages]

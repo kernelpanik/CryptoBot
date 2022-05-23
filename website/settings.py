@@ -134,11 +134,10 @@ ASGI_APPLICATION = "website.asgi.application"
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'asgi_redis.RedisChannelLayer',
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             'hosts': [('localhost', 6379)],
         },
-        'ROUTING': 'ohlcv.routing.channel_routing',
     }
 }
 
