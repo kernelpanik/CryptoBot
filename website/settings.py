@@ -130,7 +130,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 6000
 
-ASGI_APPLICATION = "website.routing.application"
+ASGI_APPLICATION = "website.asgi.application"
 
 CHANNEL_LAYERS = {
     'default': {
