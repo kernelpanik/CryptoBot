@@ -23,14 +23,12 @@ class OhlcvConsumer(AsyncWebsocketConsumer):
     groups = ["crypto_ohlcv"]
 
     async def connect(self):
-        self.n  = 0
         await self.accept()
-        await self.send(text_data='connected')
+#        await self.send(text_data='connected')
 
     async def receive(self, *, text_data):
-        self.n += 1
-        print(text_data)
-        await self.send(text_data="echo: "+ str(self.n) + " " + text_data)
+        await self.send(text_data='Hello world')
+#        await self.send(text_data="echo: "+ str(self.n) + " " + text_data)
         
     async def disconnect(self, message):
         print('diconnect')
