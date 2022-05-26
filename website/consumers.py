@@ -24,11 +24,11 @@ class OhlcvConsumer(AsyncWebsocketConsumer):
 
     async def connect(self):
         await self.accept()
-#        await self.send(text_data='connected')
+        await self.send(text_data='connected')
 
     async def receive(self, *, text_data):
-        await self.send(text_data='Hello world')
-#        await self.send(text_data="echo: "+ str(self.n) + " " + text_data)
+#        await self.send(text_data='Hello world')
+        await self.send(text_data)
         
     async def disconnect(self, message):
         print('diconnect')
