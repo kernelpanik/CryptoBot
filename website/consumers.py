@@ -19,14 +19,18 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 #         }))
 
 class OhlcvConsumer(AsyncWebsocketConsumer):
+
+    groups = ["crypto_ohlcv"]
+
     async def connect(self):
-        await self.channel_layer.group_add('crypto', self.channel_name)
+        self.n  = 0
         await self.accept()
+        await self.send(text_data='connected')
 
-    async def disconnect(self):
-        await self.channel_layer.group_discard('crypto', self.channel_name)
-        await self.disconnect()
-
-    async def send_info(self, event):
-        msg = event['text']
-        await self.send(msg)        
+    async def receive(self, *, text_data):
+        self.n += 1
+        print(text_data)
+        await self.send(text_data="echo: "+ str(self.n) + " " + text_data)
+        
+    async def disconnect(self, message):
+        print('diconnect')
