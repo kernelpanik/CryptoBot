@@ -1,6 +1,6 @@
 import json
 from channels.generic.websocket import WebsocketConsumer
-from channels.generic.websocket import AsyncWebsocketConsumer
+from channels.generic.websocket import AsyncWebsocketConsumer, async_to_sync
 
 
 # class OhlcvConsumer(WebsocketConsumer):
@@ -20,15 +20,29 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 class OhlcvConsumer(AsyncWebsocketConsumer):
 
-    groups = ["crypto_ohlcv"]
-
     async def connect(self):
         await self.accept()
-        await self.send(text_data='connected')
+        await self.channel_layer.group_add("crypto_ohlcv", self.channel_name)
+        print(f"Added {self.channel_name} channel to crypto_ohlcv")
 
-    async def receive(self, *, text_data):
-#        await self.send(text_data='Hello world')
-        await self.send(text_data)
+    async def disconnect(self, close_code):
+        await self.channel_layer.group_discard("crypto_ohlcv", self.channel_name)
+        print(f"Removed {self.channel_name} channel to crypto_ohlcv")
+
+    def receive(self, text_data=None, bytes_data=None):
+        text_data_json = json.loads(text_data)
+        message = text_data_json['message']
+        async_to_sync(self.channel_layer.group_send)(
+            'crypto_ohlcv',
+            {
+                'type': 'get_price',
+                'message': message
+            }
+        )
+    async def get_price(self, event):
+        await self.send_json(event)
+        print(f"Got message {event} at {self.channel_name}")
+
+
+    
         
-    async def disconnect(self, message):
-        print('diconnect')
