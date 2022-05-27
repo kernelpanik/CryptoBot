@@ -73,7 +73,7 @@
 <script>
   var socket = new WebSocket('ws://localhost:8000/ws/ohlcv/');
 
-  socket.onmessage = function(event){
+  socket.connect = function(event){
     var price = event.data;
 
     document.querySelector('#price').innerText = price;
