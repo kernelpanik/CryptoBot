@@ -29,7 +29,8 @@ class OhlcvConsumer(AsyncWebsocketConsumer):
         await self.channel_layer.group_discard("crypto_ohlcv", self.channel_name)
         print(f"Removed {self.channel_name} channel to crypto_ohlcv")
 
-    def receive(self, text_data=None, bytes_data=None):
+    async def receive(self, text_data=None, bytes_data=None):
+        print(f"here")
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
         async_to_sync(self.channel_layer.group_send)(
@@ -39,6 +40,7 @@ class OhlcvConsumer(AsyncWebsocketConsumer):
                 'message': message
             }
         )
+
     async def get_price(self, event):
         await self.send_json(event)
         print(f"Got message {event} at {self.channel_name}")
