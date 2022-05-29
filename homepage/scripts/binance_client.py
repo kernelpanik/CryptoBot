@@ -25,3 +25,9 @@ def get_binance_symbol():
         symbol = n['symbol']
         symbol_list.append(symbol)
     return symbol_list    
+
+
+
+
+def get_old_ohlcv():
+    pass

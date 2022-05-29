@@ -27,7 +27,10 @@
 <!-- TradingView Widget END -->
       </div>
       <div class="col">
-        column
+        <form method="POST" action={% url 'GetOldOhlcv' asset=object.coin  %}>
+          {% csrf_token %}
+          <button type="submit" id="getdata"  name="getdata" class="btn btn-primary btn-lg float-left">Get old OHLCV</button>
+       </form>
       </div>
       <div class="col">
         Column
@@ -70,8 +73,10 @@
 </div>
 <!-- TradingView Widget END -->
 
+
+
 <script>
-  console.log(window.location)
+  // console.log(window.location)
 var loc = window.location;
 
 var wsStart = "ws://";
@@ -79,15 +84,26 @@ if (loc.protocol == 'https:') {
   wsStart = 'wss://';
 }
 
-var endpoint = wsStart + loc.host + loc.pathname;
+// var endpoint = wsStart + loc.host + loc.pathname;
+var endpoint = "wss://stream.binance.com:9443/ws/{{ object|lower }}@aggTrade"
 var socket = new WebSocket(endpoint);
 
+// socket.onopen = function(e){
+//   var price = event.data;
+//     document.querySelector('#price').innerText = price;
+//   };
+
+// socket.onmessage = function(e){
+//   console.log("open", e);
+// };
+
 socket.onmessage = function(e){
-  console.log("message", e);
-};
-socket.onopen = function(e){
-  console.log("open", e);
-};
+  console.log("messages", e);
+    var obj = event.data;
+    price = JSON.parse(obj);
+    console.log(price.p);
+    document.querySelector('#price').innerText = price.p;
+  };
 socket.onerror = function(e){
   console.log("error", e);
 };
@@ -96,44 +112,15 @@ socket.onclose = function(e){
 };
 
 
-
-
-
-
-
-
-  socket.connect = function(event){
-    var price = event.data;
-
-    document.querySelector('#price').innerText = price;
-
-
-  }
 </script>
 
+
+
+
+
+
 <p id="price">{{ text }}</p>
-{{ message }}
-<!-- <script>
-var loc = window.location;
-// var wsStart = 'ws://';
-// if (loc.protocol == 'https:') {
-//     wsStart = 'wss://'
-// }
-var endpoint = 'ws://localhost:8000/ws/ohlcv/'
 
-var socket = new WebSocket(endpoint);
 
-socket.onmessage = function(e){
-    console.log("message", e);
-};
-socket.onopen = function(e){
-    console.log("open", e);
-};
-socket.onerror = function(e){
-    console.log("error", e)
-};
-socket.onclose = function(e){
-    console.log("close", e)
-};
-</script> -->
+
 {% endblock crypto_detail %}

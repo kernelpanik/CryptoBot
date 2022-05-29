@@ -12,7 +12,8 @@ from .views import (
     CryptoDetailView,
     autocompleteAdd,
     autocompleteDel,
-    SearchResults
+    SearchResults,
+    GetOldOhlcvView
 )
 
 
@@ -29,6 +30,6 @@ urlpatterns = [
     path('autocompleteAdd', views.autocompleteAdd, name='autocompleteAdd'),
     path('autocompleteDel', views.autocompleteDel, name='autocompleteDel'),
     path("dashboard/<slug:slug>/", CryptoDetailView.as_view(), name="CryptoDetails"),
-    path("search/<str:search>/", views.SearchResults, name= "SearchResults")
-
+    path("search/<str:search>/", views.SearchResults, name= "SearchResults"),
+    path("dashboard/<str:asset>/get-old-ohlcv/", GetOldOhlcvView.as_view(), name="GetOldOhlcv")
 ]

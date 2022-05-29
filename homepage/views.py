@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, FormView
 from .models import CoinList, BinanceSymbolList, Wallet, WalletAssetList, WalletAssetBalance, CryptoBotSettings
 from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance, UpdateCryptoBotSettings
-from .scripts.binance_client import get_binance_symbol
+from .scripts.binance_client import get_binance_symbol, get_old_ohlcv
 from .scripts.wallet import get_wallet_assets, info
 from django.http import JsonResponse
 import datetime
@@ -202,3 +202,12 @@ def SearchResults(request, search):
 #     return response
 ######################
 ######################    
+
+
+
+class GetOldOhlcvView(CreateView):
+    # model = CoinList
+    # template_name = "manage-coin.html"
+    
+    def post(self, request, **kwargs):
+        return redirect(reverse('WalletView'))
