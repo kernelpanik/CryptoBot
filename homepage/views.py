@@ -207,7 +207,7 @@ def SearchResults(request, search):
 
 class GetOldOhlcvView(CreateView):
     model = CoinList
-    template_name = "manage-coin.html"
+    template_name = "detail.html"
     
     def post(self, request, **kwargs):
         # if price exsists
@@ -215,8 +215,6 @@ class GetOldOhlcvView(CreateView):
         # else
         #   get only last day  
         # return redirect(reverse('WalletView'))
-        form = self.form_class(request.POST)
-
 
 
         # if form.is_valid():
@@ -230,6 +228,7 @@ class GetOldOhlcvView(CreateView):
         #     return render(
         #         request, self.template_name, {"form": form, "show_text": show_text}
         #     ) 
+        show_text = False
         return render(
-        request, self.template_name, {"form": form, "show_text": show_text}
+        request, self.template_name, {"show_text": show_text}
         )     
