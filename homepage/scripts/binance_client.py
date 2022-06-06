@@ -31,3 +31,25 @@ def get_binance_symbol():
 
 def get_old_ohlcv():
     pass
+    # if table_exists(tbname, con) is True:
+    #     past_days = 1
+    #     print(
+    #         f'Getting last {past_days} day of ohlcv data from Binance for {i}')
+    # else:
+    #     past_days = 200
+    #     print(
+    #         f'Getting last {past_days} day of ohlcv data from Binance for {i}')
+    # client = Client()
+    # interval = '4h'
+    # start_str = str(
+    #     (pd.to_datetime('today')-pd.Timedelta(str(past_days)+' days')).date())
+    # D = pd.DataFrame(client.get_historical_klines(
+    #     symbol=i, start_str=start_str, interval=interval))
+    # D.columns = ['open_time', 'open', 'high', 'low', 'close', 'volume',
+    #              'close_time', 'qav', 'num_trades', 'taker_base_vol',
+    #              'taker_quote_vol', 'is_best_match']
+    # D['date'] = [
+    #     dt.datetime.fromtimestamp(x/1000) for x in D.open_time]
+    # dfohlcv = D[['date', 'open', 'high', 'low', 'close',
+    #              'volume', 'num_trades', 'taker_base_vol', 'taker_quote_vol']]
+    # return dfohlcv

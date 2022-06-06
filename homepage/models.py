@@ -1,3 +1,5 @@
+from fileinput import close
+from syslog import LOG_WARNING
 from django.db import models
 from django.utils import timezone
 from django.utils.text import slugify
@@ -6,9 +8,14 @@ from django.utils.text import slugify
 class CoinList(models.Model):
     date = models.DateTimeField(default=timezone.now)
     coin = models.CharField(max_length=15)
-    price = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
-    totalbids = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
-    totalasks = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
+    price = models.DecimalField(max_digits=36, decimal_places=18, null=True)
+    totalbids = models.DecimalField(max_digits=36, decimal_places=18, null=True)
+    totalasks = models.DecimalField(max_digits=36, decimal_places=18, null=True)
+    open = models.DecimalField(max_digits=36, decimal_places=18, null=True)
+    high = models.DecimalField(max_digits=36, decimal_places=18, null=True)
+    low = models.DecimalField(max_digits=36, decimal_places=18, null=True)
+    close = models.DecimalField(max_digits=36, decimal_places=18, null=True)
+    volume = models.DecimalField(max_digits=36, decimal_places=18, null=True)
     slug = models.SlugField(max_length=15, unique=True, null=True)
 
     def save(self, *args, **kwargs):
