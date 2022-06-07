@@ -210,6 +210,7 @@ class GetOldOhlcvView(CreateView):
     template_name = "detail.html"
     
     def post(self, request, **kwargs):
+        get_old_ohlcv()
         # if price exsists
             # get 200 days of ohclv
         # else
