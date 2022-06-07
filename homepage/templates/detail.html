@@ -27,7 +27,7 @@
 <!-- TradingView Widget END -->
       </div>
       <div class="col">
-        <form method="POST" action={% url 'GetOldOhlcv' asset=object.coin  %}>
+          <form method="POST" action={% url 'GetOldOhlcv' asset=object.coin  %}>
           {% csrf_token %}
           <button type="submit" id="getdata" name="getdata" class="btn btn-primary btn-lg float-left">Get old OHLCV</button>
        </form>
@@ -75,7 +75,7 @@
 
 
 
-<script>
+<!-- <script>
   // console.log(window.location)
 var loc = window.location;
 
@@ -112,7 +112,7 @@ socket.onclose = function(e){
 };
 
 
-</script>
+</script> -->
 
 
 

@@ -34,7 +34,7 @@ class ManageCoinAddView(CreateView):
     def post(self, request, **kwargs):
         symbolist = BinanceSymbolList.objects.all()
         coinlist = CoinList.objects.all()
-        if 'coinadd'in request.POST:
+        if 'coinadd' in request.POST:
             addform = self.form_class(request.POST)
             if addform.is_valid():
                 addform.save()
@@ -228,7 +228,9 @@ class GetOldOhlcvView(CreateView):
         #     return render(
         #         request, self.template_name, {"form": form, "show_text": show_text}
         #     ) 
-        show_text = False
-        return render(
-        request, self.template_name, {"show_text": show_text}
-        )     
+        # show_text = False
+        # return render(
+        # request, self.template_name, {"show_text": show_text}
+        # )
+        # return redirect(reverse('CryptoDetails'))
+        return redirect('CryptoDetails') 
