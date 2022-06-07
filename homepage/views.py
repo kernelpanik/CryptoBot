@@ -208,7 +208,6 @@ def SearchResults(request, search):
 class GetOldOhlcvView(CreateView):
     model = CoinList
     template_name = "detail.html"
-    # fields = ["coin"]
     
     def post(self, request, **kwargs):
         # if price exsists
@@ -234,4 +233,6 @@ class GetOldOhlcvView(CreateView):
         # request, self.template_name, {"show_text": show_text}
         # )
         # return redirect(reverse('CryptoDetails'))
+        a = request.GET.get("slug")
+        print(a)
         return redirect('CryptoDetails', slug="MANAUSDT") 
