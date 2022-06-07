@@ -29,8 +29,8 @@ def get_binance_symbol():
 
 
 
-def get_old_ohlcv():
-    obj = CoinList.objects.filter(coin="MANAUSDT",price__isnull=True)
+def get_old_ohlcv(slug):
+    obj = CoinList.objects.filter(coin=slug,price__isnull=True)
     print(obj)
     print("no old data found")
     pass

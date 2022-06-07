@@ -210,7 +210,8 @@ class GetOldOhlcvView(CreateView):
     template_name = "detail.html"
     
     def post(self, request, **kwargs):
-        get_old_ohlcv()
+        slug = self.kwargs['asset']
+        get_old_ohlcv(slug)
         # if price exsists
             # get 200 days of ohclv
         # else
@@ -234,5 +235,5 @@ class GetOldOhlcvView(CreateView):
         # request, self.template_name, {"show_text": show_text}
         # )
         # return redirect(reverse('CryptoDetails'))
-        slug = self.kwargs['asset']
+        # slug = self.kwargs['asset']
         return redirect('CryptoDetails', slug=slug) 
