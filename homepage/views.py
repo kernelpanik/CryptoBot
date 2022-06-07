@@ -233,6 +233,5 @@ class GetOldOhlcvView(CreateView):
         # request, self.template_name, {"show_text": show_text}
         # )
         # return redirect(reverse('CryptoDetails'))
-        a = request.GET.get("slug")
-        print(a)
-        return redirect('CryptoDetails', slug="MANAUSDT") 
+        slug = self.kwargs['asset']
+        return redirect('CryptoDetails', slug=slug) 
