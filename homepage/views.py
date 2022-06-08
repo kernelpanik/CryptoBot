@@ -8,7 +8,7 @@ from .scripts.wallet import get_wallet_assets, info
 from django.http import JsonResponse
 import datetime
 from django.conf import settings
-
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -168,6 +168,13 @@ def autocompleteDel(request):
 class CryptoDetailView(DetailView):
     model = CoinList
     template_name = "detail.html"
+
+    def get(self, request, *args, **kwargs):
+        asset = "MANAUSDT" 
+        context = {"asset": asset}
+        return render(request, self.template_name, context)
+
+
    
 
 def SearchResults(request, search):
@@ -236,6 +243,12 @@ class GetOldOhlcvView(CreateView):
         # return render(
         # request, self.template_name, {"show_text": show_text}
         # )
-        # return redirect(reverse('CryptoDetails'))
-        # slug = self.kwargs['asset']
-        return redirect('CryptoDetails', slug=slug) 
+        asset = "MANAUSDT"
+        context = {
+        "asset": asset 
+        }
+        return render(
+        request, self.template_name, context
+        )
+
+        #return redirect('CryptoDetails', slug=slug) 
