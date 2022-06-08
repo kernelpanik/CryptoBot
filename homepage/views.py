@@ -211,7 +211,9 @@ class GetOldOhlcvView(CreateView):
     
     def post(self, request, **kwargs):
         slug = self.kwargs['asset']
-        get_old_ohlcv(slug)
+        if get_old_ohlcv(slug):
+            message = "No old data found"
+            print(message)
         # if price exsists
             # get 200 days of ohclv
         # else

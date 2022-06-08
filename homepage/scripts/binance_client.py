@@ -31,9 +31,9 @@ def get_binance_symbol():
 
 def get_old_ohlcv(slug):
     obj = CoinList.objects.filter(coin=slug,price__isnull=True)
-    print(obj)
-    print("no old data found")
-    pass
+    if obj.exists():
+        return True
+    # print("no old data found")
     # if table_exists(tbname, con) is True:
     #     past_days = 1
     #     print(
