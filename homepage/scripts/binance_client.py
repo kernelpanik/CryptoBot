@@ -34,10 +34,10 @@ def get_old_ohlcv(slug):
     obj = CoinList.objects.filter(coin=slug,price__isnull=True)
     if obj.exists():
         past_days = 20
-#        return True
+        status = True
     else:
         past_days = 1
-        return False   
+        status = False  
     # if table_exists(tbname, con) is True:
     #     past_days = 1
     #     print(
@@ -59,4 +59,5 @@ def get_old_ohlcv(slug):
         dt.datetime.fromtimestamp(x/1000) for x in D.open_time]
     dfohlcv = D[['date', 'open', 'high', 'low', 'close',
                  'volume', 'num_trades', 'taker_base_vol', 'taker_quote_vol']]
+    print(dfohlcv)             
     return True, dfohlcv
