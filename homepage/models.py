@@ -85,6 +85,11 @@ class Ohlcv(models.Model):
     takerquotevol = models.DecimalField(max_digits=36, decimal_places=18, null=True)
     slug = models.SlugField(max_length=15, unique=True, null=True)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.coin).upper()
+        self.coin = (self.coin).upper()
+        super(CoinList, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return self.coin
