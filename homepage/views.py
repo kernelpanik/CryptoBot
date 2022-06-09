@@ -172,11 +172,11 @@ class CryptoDetailView(DetailView):
     def get(self, request, *args, **kwargs):
         asset = self.kwargs.get("slug")
         if get_old_ohlcv(asset):
-            messageno = "No old OHLCV data found"
+            messageno = "No OHLCV data found"
             messageok = ""
 
         else:
-            messageok = "old OHLCV data found"
+            messageok = "OHLCV data found"
             messageno = ""
         context = {"asset": asset, "messageok": messageok, "messageno": messageno}
         return render(request, self.template_name, context)
