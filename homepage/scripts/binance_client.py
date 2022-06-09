@@ -41,7 +41,7 @@ def get_old_ohlcv(slug):
     #     past_days = 1
     #     status = False  
 
-    past_days = 1
+    past_days = 20
     client = Client()
     interval = '1h'
     start_str = str(

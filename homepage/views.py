@@ -235,7 +235,7 @@ class GetOldOhlcvView(CreateView):
         #   get only last day  
         # return redirect(reverse('WalletView'))
 
-
+        get_old_ohlcv(slug)
         # if form.is_valid():
         #     form.save()
         #     show_text = True
