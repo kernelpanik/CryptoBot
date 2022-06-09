@@ -12,6 +12,7 @@ pandas-ta = "==0.3.14b0"
 daphne = "*"
 channels = "*"
 channels-redis = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 autopep8 = "*"

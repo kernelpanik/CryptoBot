@@ -8,8 +8,10 @@ import json
 import hashlib
 from urllib.parse import urlencode
 import hmac
-from ..models import CoinList, BinanceSymbolList
+from ..models import CoinList, BinanceSymbolList, Ohlcv
 import os
+from sqlalchemy import create_engine
+
 
 api_key = os.getenv("api_key")
 api_secret = os.getenv("api_secret")
@@ -31,21 +33,15 @@ def get_binance_symbol():
 
 
 def get_old_ohlcv(slug):
-    obj = CoinList.objects.filter(coin=slug,price__isnull=True)
-    if obj.exists():
-        past_days = 20
-        status = True
-    else:
-        past_days = 1
-        status = False  
-    # if table_exists(tbname, con) is True:
-    #     past_days = 1
-    #     print(
-    #         f'Getting last {past_days} day of ohlcv data from Binance for {i}')
+    # obj = CoinList.objects.filter(coin=slug,price__isnull=True)
+    # if obj.exists():
+    #     past_days = 5
+    #     status = True
     # else:
-    #     past_days = 200
-    #     print(
-    #         f'Getting last {past_days} day of ohlcv data from Binance for {i}')
+    #     past_days = 1
+    #     status = False  
+
+    past_days = 1
     client = Client()
     interval = '1h'
     start_str = str(
@@ -59,5 +55,15 @@ def get_old_ohlcv(slug):
         dt.datetime.fromtimestamp(x/1000) for x in D.open_time]
     dfohlcv = D[['date', 'open', 'high', 'low', 'close',
                  'volume', 'num_trades', 'taker_base_vol', 'taker_quote_vol']]
-    print(dfohlcv)             
+    print(dfohlcv)
+    engine = create_engine('sqlite:///db.sqlite3', echo=False)
+    dfohlcv.to_sql(Ohlcv._meta.db_table,
+                           if_exists='append', con=engine, index=False)    
+
+
+    # Ohlcv.objects.update_or_create( \
+    #             defaults={'free': free, 'locked': locked, \
+    #             'ownusdt': ownusdt, 'ownbtc': ownbtc}, \
+    #             asset=asset )                       
+
     return True, dfohlcv
