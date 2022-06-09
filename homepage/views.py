@@ -170,8 +170,15 @@ class CryptoDetailView(DetailView):
     template_name = "detail.html"
 
     def get(self, request, *args, **kwargs):
-        asset = "MANAUSDT" 
-        context = {"asset": asset}
+        asset = self.kwargs.get("slug")
+        if get_old_ohlcv(asset):
+            messageno = "No old OHLCV data found"
+            messageok = ""
+
+        else:
+            messageok = "old OHLCV data found"
+            messageno = ""
+        context = {"asset": asset, "messageok": messageok, "messageno": messageno}
         return render(request, self.template_name, context)
 
 
@@ -218,9 +225,9 @@ class GetOldOhlcvView(CreateView):
     
     def post(self, request, **kwargs):
         slug = self.kwargs['asset']
-        if get_old_ohlcv(slug):
-            message = "No old data found"
-            print(message)
+        # if get_old_ohlcv(slug):
+        #     message = "No old OHLCV data found"
+        #     print(message)
         # if price exsists
             # get 200 days of ohclv
         # else
@@ -243,7 +250,7 @@ class GetOldOhlcvView(CreateView):
         # return render(
         # request, self.template_name, {"show_text": show_text}
         # )
-        asset = "MANAUSDT"
+        asset = slug
         context = {
         "asset": asset 
         }
