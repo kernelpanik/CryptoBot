@@ -16,3 +16,7 @@ Install dependecies
   $ cd CryptoBot  
   $ pipenv shell  
   $ pipenv sync
+  
+Set up variables  
+  $ cp .env.example .env  
+  and write down your config  
