@@ -13,6 +13,7 @@ daphne = "*"
 channels = "*"
 channels-redis = "*"
 sqlalchemy = "*"
+mysqlclient = "*"
 
 [dev-packages]
 autopep8 = "*"

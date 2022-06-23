@@ -15,6 +15,26 @@ import os
 from dotenv import load_dotenv
 
 
+load_dotenv()
+env_path = Path('.')/'.env'
+load_dotenv(dotenv_path=env_path)
+
+# retrieving keys and adding them to the project
+# from the .env file through their key names
+api_key = os.getenv("api_key")
+api_secret = os.getenv("api_secret")
+SECRET_KEY = os.getenv("SECRET_KEY")
+redis_pwd = os.getenv("redis_pwd")
+mysql_host = os.getenv("mysql_host")
+mysql_db_name = os.getenv("mysql_db_name")
+mysql_user = os.getenv("mysql_user")
+mysql_pwd = os.getenv("mysql_pwd")
+
+
+
+
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -75,14 +95,16 @@ WSGI_APPLICATION = 'website.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': f"{mysql_db_name}",
+        'USER': f"{mysql_user}",
+        'PASSWORD': f"{mysql_pwd}",
+        'HOST': f"{mysql_host}",
 }
+}
+
 
 
 # Password validation
@@ -134,16 +156,9 @@ ASGI_APPLICATION = "website.asgi.application"
 
 
 
-load_dotenv()
-env_path = Path('.')/'.env'
-load_dotenv(dotenv_path=env_path)
 
-# retrieving keys and adding them to the project
-# from the .env file through their key names
-api_key = os.getenv("api_key")
-api_secret = os.getenv("api_secret")
-SECRET_KEY = os.getenv("SECRET_KEY")
-redis_pwd = os.getenv("redis_pwd")
+
+
 
 
 CHANNEL_LAYERS = {

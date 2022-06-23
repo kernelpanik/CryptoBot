@@ -80,9 +80,9 @@ class Ohlcv(models.Model):
     low = models.DecimalField(max_digits=36, decimal_places=18, null=True)
     close = models.DecimalField(max_digits=36, decimal_places=18, null=True)
     volume = models.DecimalField(max_digits=36, decimal_places=18, null=True)
-    numtrades = models.DecimalField(max_digits=36, decimal_places=18, null=True)
-    takerbasevol = models.DecimalField(max_digits=36, decimal_places=18, null=True)
-    takerquotevol = models.DecimalField(max_digits=36, decimal_places=18, null=True)
+    num_trades = models.DecimalField(max_digits=36, decimal_places=18, null=True)
+    taker_base_vol = models.DecimalField(max_digits=36, decimal_places=18, null=True)
+    taker_quote_vol = models.DecimalField(max_digits=36, decimal_places=18, null=True)
 
 
     def __str__(self):
