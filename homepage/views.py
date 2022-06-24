@@ -171,10 +171,7 @@ class CryptoDetailView(DetailView):
 
     def get(self, request, *args, **kwargs):
         asset = self.kwargs.get("slug")
-
-#        obj = Ohlcv.objects.filter(coin=asset,open__isnull=True)
         obj = Ohlcv.objects.filter(coin=asset)
-        print(obj)
         if not obj.exists():
             messageno = "No OHLCV data found"
             messageok = ""

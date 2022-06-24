@@ -4,8 +4,7 @@ from django.utils.text import slugify
 
 
 class CoinList(models.Model):
-    date = models.DateTimeField(default=timezone.now, primary_key=True)
-    coin = models.CharField(max_length=15)
+    coin = models.CharField(max_length=15, primary_key=True)
     slug = models.SlugField(max_length=15, unique=True, null=True)
 
     def save(self, *args, **kwargs):
@@ -60,15 +59,19 @@ class WalletAssetBalance(models.Model):
 
 
 class CryptoBotSettings(models.Model):
-    api_key = models.CharField(max_length=100)
-    api_secret = models.CharField(max_length=100)
-    SECRET_KEY = models.CharField(max_length=100)
+    api_key = models.CharField(max_length=100, null=True)
+    api_secret = models.CharField(max_length=100, null=True)
+    SECRET_KEY = models.CharField(max_length=100, null=True)
+    mysql_host = models.GenericIPAddressField(null=True)
+    mysql_db_name = models.CharField(max_length=100, null=True)
+    mysql_user = models.CharField(max_length=100, null=True) 
+    mysql_pwd = models.CharField(max_length=100, null=True)
 
 
 
 
 class Ohlcv(models.Model):
-    coin = models.CharField(max_length=15)
+    coin = models.OneToOneField(CoinList,on_delete=models.CASCADE, null=True)
     date = models.DateTimeField(default=timezone.now, primary_key=True)
     open = models.DecimalField(max_digits=36, decimal_places=18, null=True)
     high = models.DecimalField(max_digits=36, decimal_places=18, null=True)
