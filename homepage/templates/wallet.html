@@ -1,19 +1,72 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+
+
 <div class="container-fluid" style="margin-top:80px">
    <div class="row">
-      <div class="col-sm-3 col-12">
-         <h2 class="text-left">Wallet. . . 
-            <small class="text-muted">   a simple summary</small>
-         </h2>
+     <div class="col">
+       <h3 class="pull-left"><b>Balance Tot</b></h3>
+       0.0 USDT<br>
+       0.0 BTC <br> 
       </div>
-      <div class="col-sm-3 col-12">
+      <div class="col">
+       <h3 class="pull-left"><b>Spot</b></h3>
+       {{ wallet_balance.last.usdtbalance }} USDT
+       <br>
+       {{ wallet_balance.last.btcbalance }} BTC
+      </div>
+      <div class="col">
+       <h3 class="pull-left"><b>Savings</b></h3>
+       0.0 USDT<br>
+       0.0 BTC <br>
+      </div>
+      <div class="col">
+       <h3 class="pull-left"><b>Stake</b></h3>
+       0.0 USDT<br>
+       0.0 BTC <br>
+      </div>
+      <div class="col">
+         <form method="POST" action={% url 'UpdateWalletAsset' %}>
+            {% csrf_token %}
+            <button type="submit" id="assetlist"  name="assetlist" class="btn btn-primary btn-sm float-end">Update Asset</button>
+         </form>
+         <br><br>
+         <div class="float-end">Last update: {{ wallet_balance.last.time }}</div>
+      </div>
+   </div>
+
+
+   </div>
+   <div class="row">
+     <div class="col">
+       1 of 3
+     </div>
+     <div class="col">
+       2 of 3
+     </div>
+     <div class="col">
+       3 of 3
+     </div>
+   </div>
+ </div>
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container-fluid" style="margin-top:80px">
+   <div class="row">
          <form method="POST" action={% url 'UpdateWalletAsset' %}>
             {% csrf_token %}
             <button type="submit" id="assetlist"  name="assetlist" class="btn btn-primary btn-lg float-end">Update Asset</button>
          </form>
-      </div>
   </div>
    <div class="row ">
       <div class="col col-sm-6">
@@ -21,12 +74,6 @@
             <div class="col col-sm-2">
                <h3 class="pull-left"><b>Assets</b></h3>
             </div>
-            <!-- <div class="col col-sm-10 ">
-               <form method="POST" action={% url 'UpdateWalletAsset' %}>
-               {% csrf_token %}
-               <button type="submit" id="assetlist"  name="assetlist" class="btn btn-primary btn-sm float-end">Update Asset</button>
-               </form>
-            </div> -->
             <table class="table">
                <thead>
                   <tr>
@@ -77,6 +124,6 @@
          </div>   
       </div>
    </div>
-</div>
+</div> -->
 
 {% endblock content %}
