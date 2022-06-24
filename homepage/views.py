@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView, CreateView, DetailView, FormView
-from .models import CoinList, BinanceSymbolList, Wallet, WalletAssetList, WalletAssetBalance, CryptoBotSettings
+from .models import CoinList, BinanceSymbolList, Ohlcv, Wallet, WalletAssetList, WalletAssetBalance, CryptoBotSettings
 from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance, UpdateCryptoBotSettings
 from .scripts.binance_client import get_binance_symbol, get_old_ohlcv
 from .scripts.wallet import get_wallet_assets, info
@@ -172,8 +172,10 @@ class CryptoDetailView(DetailView):
     def get(self, request, *args, **kwargs):
         asset = self.kwargs.get("slug")
 
-        obj = CoinList.objects.filter(coin=asset,price__isnull=True)
-        if obj.exists():
+#        obj = Ohlcv.objects.filter(coin=asset,open__isnull=True)
+        obj = Ohlcv.objects.filter(coin=asset)
+        print(obj)
+        if not obj.exists():
             messageno = "No OHLCV data found"
             messageok = ""
         else:
