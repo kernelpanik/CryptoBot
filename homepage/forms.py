@@ -96,7 +96,7 @@ class UpdateWalletAsset(forms.ModelForm):
 class UpdateWalletBalance(forms.ModelForm):
     class Meta:
         model = WalletAssetBalance
-        fields = ["usdtbalance", "btcbalance"]
+        fields = ["usdtbal", "btcbal"]
 
     def __init__(self, *args, **kwargs):
         super(UpdateWalletBalance, self).__init__(*args, **kwargs)

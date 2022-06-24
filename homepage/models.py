@@ -53,8 +53,14 @@ class WalletAssetList(models.Model):
 
 class WalletAssetBalance(models.Model):
     time = models.DateTimeField(auto_now=True, primary_key=True)
-    usdtbalance = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
-    btcbalance = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+    usdtbal = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+    btcbal = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+    usdtspot = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+    btcspot = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+    usdtsav = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+    btcsav = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+    usdtstake = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
+    btcstake = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
 
 
 
