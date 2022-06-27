@@ -148,11 +148,10 @@ def get_binance_flex_defi_stacking():
     flex_defi_stake_usdt = 0
     flex_defi_stake_btc = 0
     flex_defi_stake_asset = json.loads(flex_defi.text)
-
-    # if json.loads  is empty:
-    #     flex_defi_stake_usdt = 0
-    #     flex_defi_stake_btc = 0
-    #     return flex_defi_stake_usdt, flex_defi_stake_btc
+    if not flex_defi_stake_asset:
+        flex_defi_stake_usdt = 0.0
+        flex_defi_stake_btc = 0.0
+        return flex_defi_stake_usdt, flex_defi_stake_btc
     for item in flex_defi_stake_asset:
         asset = item['asset']
         asset_amount = item['amount']
