@@ -8,8 +8,9 @@
    <div class="row">
      <div class="col">
        <h3 class="pull-left"><b>Balance Tot</b></h3>
-       0.0 ₮<br>
-       0.0 ₿ <br> 
+       {{ wallet_balance.last.usdtbal }} ₮
+       <br>
+       {{ wallet_balance.last.btcbal }} ₿
       </div>
       <div class="col">
        <h3 class="pull-left"><b>Spot</b></h3>
@@ -25,8 +26,9 @@
       </div>
       <div class="col">
        <h3 class="pull-left"><b>Stake</b></h3>
-       0.0 ₮<br>
-       0.0 ₿ <br>
+       {{ wallet_balance.last.usdtstake }} ₮
+       <br>
+       {{ wallet_balance.last.btcstake }} ₿
       </div>
       <div class="col">
          <form method="POST" action={% url 'UpdateWalletAsset' %}>

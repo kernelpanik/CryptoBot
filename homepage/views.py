@@ -101,7 +101,10 @@ class UpdateWalletAssetView(CreateView):
                             defaults={'free': free, 'locked': locked, \
                             'ownusdt': ownusdt, 'ownbtc': ownbtc}, \
                             asset=asset )
-        WalletAssetBalance.objects.create(usdtspot = spot_usdt, btcspot = spot_btc, usdtsav = usdt_save, btcsav = btc_save )                    
+        usdt_tot = float(usdt_save) + float(spot_usdt)
+        btc_tot = float(btc_save) + float(spot_btc)
+        WalletAssetBalance.objects.create(usdtspot = spot_usdt, btcspot = spot_btc, usdtsav = usdt_save, btcsav = btc_save, 
+                usdtbal = usdt_tot, btcbal = btc_tot )                    
         return redirect(reverse('WalletView'))                      
 
 
