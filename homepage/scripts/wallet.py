@@ -19,8 +19,7 @@ client = Client(api_key, api_secret)
 # get account info
 info = client.get_account()
 
-
-# get spot, savings, and staking ( to fix staking )
+# get Binance spot
 def get_wallet_assets(info):
     own_btc_list = []
     own_usdt_list = []
@@ -52,15 +51,9 @@ def get_wallet_assets(info):
                 continue
     spot_btc = sum_usdt / float(current_btc_price_USD)
     spot_usdt = sum_usdt
-    # df_assets["own_btc"] = pd.Series(own_btc_list)
     df_assets['ownusdt'] = own_usdt_list
     df_assets['ownbtc'] = own_btc_list
     return df_assets, spot_usdt, spot_btc
-
-
-
-
-
 
 # Get Binance savings
 def get_binance_savings():
@@ -72,20 +65,17 @@ def get_binance_savings():
     })
     hashedsig = hmac.new(api_secret.encode('utf-8'), params.encode('utf-8'),hashlib.sha256).hexdigest()
     save_balance = requests.get("https://api.binance.com/sapi/v1/lending/union/account",
-    #save_balance = requests.get("https://api.binance.com/sapi/v1/lending/project/list",
     params = {
         "timestamp" : servertimeint,
         "signature" : hashedsig,   
-#        "type": "ACTIVITY",   
     },
     headers = {
         "X-MBX-APIKEY" : api_key,
     }
     )
-#    print(save_balance.text)
     save_balance = save_balance.text
     save_balance = json.loads(save_balance)
     return save_balance
 
-
+# Get Binance stake
 
