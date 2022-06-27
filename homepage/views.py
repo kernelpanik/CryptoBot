@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, ListView, CreateView, DetailView,
 from .models import CoinList, BinanceSymbolList, Ohlcv, Wallet, WalletAssetList, WalletAssetBalance, CryptoBotSettings
 from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance, UpdateCryptoBotSettings
 from .scripts.binance_client import get_binance_symbol, get_old_ohlcv
-from .scripts.wallet import get_wallet_assets, info
+from .scripts.wallet import get_wallet_assets, get_binance_savings, info
 from django.http import JsonResponse
 import datetime
 from django.conf import settings
@@ -86,7 +86,11 @@ class UpdateWalletAssetView(CreateView):
     def post(self, request, **kwargs):
         form = self.form_class(request.POST)
         show_text = True
-        asset_list, own_usdt, own_btc = get_wallet_assets(info)
+        save_balance = get_binance_savings()
+        btc_save = save_balance['totalAmountInBTC']
+        usdt_save = save_balance['totalAmountInUSDT']
+
+        asset_list, spot_usdt, spot_btc = get_wallet_assets(info)
         for index, row in asset_list.iterrows():
             asset = row['asset']
             free = row['free']
@@ -97,7 +101,7 @@ class UpdateWalletAssetView(CreateView):
                             defaults={'free': free, 'locked': locked, \
                             'ownusdt': ownusdt, 'ownbtc': ownbtc}, \
                             asset=asset )
-        WalletAssetBalance.objects.create(usdtbal = own_usdt, btcbal = own_btc)                    
+        WalletAssetBalance.objects.create(usdtspot = spot_usdt, btcspot = spot_btc, usdtsav = usdt_save, btcsav = btc_save )                    
         return redirect(reverse('WalletView'))                      
 
 

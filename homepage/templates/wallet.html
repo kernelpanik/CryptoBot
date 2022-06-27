@@ -13,14 +13,15 @@
       </div>
       <div class="col">
        <h3 class="pull-left"><b>Spot</b></h3>
-       {{ wallet_balance.last.usdtbal }} ₮
+       {{ wallet_balance.last.usdtspot }} ₮
        <br>
-       {{ wallet_balance.last.btcbal }} ₿
+       {{ wallet_balance.last.btcspot }} ₿
       </div>
       <div class="col">
        <h3 class="pull-left"><b>Savings</b></h3>
-       0.0 ₮<br>
-       0.0 ₿ <br>
+       {{ wallet_balance.last.usdtsav }} ₮
+       <br>
+       {{ wallet_balance.last.btcsav }} ₿
       </div>
       <div class="col">
        <h3 class="pull-left"><b>Stake</b></h3>
