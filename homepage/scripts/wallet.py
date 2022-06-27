@@ -13,11 +13,14 @@ import os
 api_key = os.getenv("api_key")
 api_secret = os.getenv("api_secret")
 
+
 # initialize
 client = Client(api_key, api_secret)
 
+
 # get account info
 info = client.get_account()
+
 
 # get Binance spot
 def get_wallet_assets(info):
@@ -55,7 +58,8 @@ def get_wallet_assets(info):
     df_assets['ownbtc'] = own_btc_list
     return df_assets, spot_usdt, spot_btc
 
-# Get Binance savings
+
+# Get Binance savings   (ADD flexible, locked)
 def get_binance_savings():
     servertime = requests.get("https://api.binance.com/api/v1/time")
     servertimeobject = json.loads(servertime.text)
@@ -77,5 +81,50 @@ def get_binance_savings():
     save_balance = json.loads(save_balance)
     return save_balance
 
-# Get Binance stake
 
+# Get Binance locked staking
+def get_binance_locked_stacking():
+    prod_type = "STAKING"
+    servertime = requests.get("https://api.binance.com/api/v1/time")
+    servertimeobject = json.loads(servertime.text)
+    servertimeint = servertimeobject['serverTime']
+    params = urlencode({
+        "timestamp" : servertimeint,
+        "product" : prod_type,
+    })
+    hashedsig = hmac.new(api_secret.encode('utf-8'), params.encode('utf-8'),hashlib.sha256).hexdigest()
+    stake_balance = requests.get("https://api.binance.com/sapi/v1/staking/position",
+        params = {
+            "timestamp" : servertimeint,
+            "product" : prod_type, 
+            "signature" : hashedsig,
+        
+        },
+        headers = {
+            "X-MBX-APIKEY" : api_key,
+        }
+    )
+    locked_stake_usdt = 0
+    locked_stake_btc = 0
+    lock_stake_asset = json.loads(stake_balance.text)
+    for item in lock_stake_asset:
+        asset = item['asset']
+        asset_amount = item['amount']
+        asset_amount = float(asset_amount)
+        asset_usdt_price = client.get_symbol_ticker(symbol=asset + "USDT")
+        asset_usdt_price = asset_usdt_price['price']
+        locked_stake_usd = asset_amount * float(asset_usdt_price)
+        locked_stake_usdt = locked_stake_usd + locked_stake_usdt
+        btc_price = client.get_symbol_ticker(symbol="BTCUSDT")["price"]
+        locked_stake_in_btc = asset_amount * float(btc_price)
+        locked_stake_btc = locked_stake_in_btc + locked_stake_btc    
+    locked_stake_btc = locked_stake_usdt / float(btc_price)
+    return locked_stake_usdt, locked_stake_btc
+
+
+
+# Get Binance flexible defi staking
+prod_type = "F_DEFI"
+
+# Get Binance locked defi staking 
+prod_type = "L_DEFI"
