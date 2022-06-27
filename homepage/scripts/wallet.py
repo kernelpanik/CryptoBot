@@ -124,7 +124,61 @@ def get_binance_locked_stacking():
 
 
 # Get Binance flexible defi staking
-prod_type = "F_DEFI"
+def get_binance_flex_defi_stacking():
+    prod_type = "F_DEFI"
+    servertime = requests.get("https://api.binance.com/api/v1/time")
+    servertimeobject = json.loads(servertime.text)
+    servertimeint = servertimeobject['serverTime']
+    params = urlencode({
+        "timestamp" : servertimeint,
+        "product" : prod_type,
+    })
+    hashedsig = hmac.new(api_secret.encode('utf-8'), params.encode('utf-8'),hashlib.sha256).hexdigest()
+    flex_defi = requests.get("https://api.binance.com/sapi/v1/staking/position",
+        params = {
+            "timestamp" : servertimeint,
+            "product" : prod_type, 
+            "signature" : hashedsig,
+        
+        },
+        headers = {
+            "X-MBX-APIKEY" : api_key,
+        }
+    )
+    flex_defi_stake_usdt = 0
+    flex_defi_stake_btc = 0
+    flex_defi_stake_asset = json.loads(flex_defi.text)
+
+    # if json.loads  is empty:
+    #     flex_defi_stake_usdt = 0
+    #     flex_defi_stake_btc = 0
+    #     return flex_defi_stake_usdt, flex_defi_stake_btc
+    for item in flex_defi_stake_asset:
+        asset = item['asset']
+        asset_amount = item['amount']
+        asset_amount = float(asset_amount)
+        asset_usdt_price = client.get_symbol_ticker(symbol=asset + "USDT")
+        asset_usdt_price = asset_usdt_price['price']
+        flex_defi_stake_usd = asset_amount * float(asset_usdt_price)
+        flex_defi_stake_usdt = flex_defi_stake_usd + flex_defi_stake_usdt
+        btc_price = client.get_symbol_ticker(symbol="BTCUSDT")["price"]
+        print("BTC price")
+        print(btc_price)
+        flex_defi_stake_in_btc = asset_amount * float(btc_price)
+        flex_defi_stake_btc = flex_defi_stake_in_btc + flex_defi_stake_btc    
+    flex_defi_stake_btc = flex_defi_stake_usdt / float(btc_price)
+    return flex_defi_stake_usdt, flex_defi_stake_btc
+
+
+
+
+
+
+
+
+
+
+
 
 # Get Binance locked defi staking 
 prod_type = "L_DEFI"

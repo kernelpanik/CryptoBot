@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, ListView, CreateView, DetailView,
 from .models import CoinList, BinanceSymbolList, Ohlcv, Wallet, WalletAssetList, WalletAssetBalance, CryptoBotSettings
 from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance, UpdateCryptoBotSettings
 from .scripts.binance_client import get_binance_symbol, get_old_ohlcv
-from .scripts.wallet import get_wallet_assets, get_binance_savings, get_binance_locked_stacking, info
+from .scripts.wallet import get_wallet_assets, get_binance_savings, get_binance_locked_stacking, get_binance_flex_defi_stacking, info
 from django.http import JsonResponse
 import datetime
 from django.conf import settings
@@ -90,6 +90,8 @@ class UpdateWalletAssetView(CreateView):
         btc_save = save_balance['totalAmountInBTC']
         usdt_save = save_balance['totalAmountInUSDT']
         locked_stake_usdt, locked_stake_btc = get_binance_locked_stacking()
+        flex_defi_stake_usdt, flex_defi_stake_btc = get_binance_flex_defi_stacking()
+        # print(flex_defi_stake_usdt, flex_defi_stake_btc)
         asset_list, spot_usdt, spot_btc = get_wallet_assets(info)
         for index, row in asset_list.iterrows():
             asset = row['asset']
