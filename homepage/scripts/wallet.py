@@ -122,7 +122,6 @@ def get_binance_locked_stacking():
     return locked_stake_usdt, locked_stake_btc
 
 
-
 # Get Binance flexible defi staking
 def get_binance_flex_defi_stacking():
     prod_type = "F_DEFI"
@@ -167,16 +166,6 @@ def get_binance_flex_defi_stacking():
         flex_defi_stake_btc = flex_defi_stake_in_btc + flex_defi_stake_btc    
     flex_defi_stake_btc = flex_defi_stake_usdt / float(btc_price)
     return flex_defi_stake_usdt, flex_defi_stake_btc
-
-
-
-
-
-
-
-
-
-
 
 
 # Get Binance locked defi staking 
