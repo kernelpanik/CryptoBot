@@ -39,21 +39,41 @@
          <div class="float-end">Last update: {{ wallet_balance.last.time }}</div>
       </div>
    </div>
-
-
-   </div>
+   <hr>
    <div class="row">
-     <div class="col">
-       1 of 3
-     </div>
-     <div class="col">
-       2 of 3
-     </div>
-     <div class="col">
-       3 of 3
-     </div>
+      <div class="col">
+         <div class="row align-items-center overflow-auto" style="margin-top:20px; max-height: 45%">
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th scope="col">#</th>
+                     <th scope="col">Asset</th>
+                     <th scope="col">Free</th>
+                     <th scope="col">Locked</th>
+                     <th scope="col">BTC ₿</th>
+                     <th scope="col">USDT $</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for x in wallet_asset %}
+                  <tr>
+                     <th scope="row">{{ forloop.counter }} </th>
+                     <td>{{ x.asset }}</td>
+                     <td>{{ x.free.normalize }}</td>
+                     <td>{{ x.locked.normalize }}</td>
+                     <td>{{ x.ownbtc.normalize }}</td>
+                     <td>{{ x.ownusdt.normalize }}</td>
+                  </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+      </div>
+      <div class="col">
+         
+      </div>
    </div>
- </div>
+   </div>
 
 
 
