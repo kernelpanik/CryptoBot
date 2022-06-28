@@ -4,7 +4,8 @@ from django.views.generic import TemplateView, ListView, CreateView, DetailView,
 from .models import CoinList, BinanceSymbolList, Ohlcv, Wallet, WalletAssetList, WalletAssetBalance, CryptoBotSettings
 from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAsset, UpdateWalletBalance, UpdateCryptoBotSettings
 from .scripts.binance_client import get_binance_symbol, get_old_ohlcv
-from .scripts.wallet import get_wallet_assets, get_binance_savings, get_binance_locked_stacking, get_binance_flex_defi_stacking, info
+from .scripts.wallet import get_wallet_assets, get_binance_savings, get_binance_locked_stacking, \
+get_binance_flex_defi_stacking, get_binance_locked_defi_stacking, info
 from django.http import JsonResponse
 import datetime
 from django.conf import settings
@@ -91,6 +92,7 @@ class UpdateWalletAssetView(CreateView):
         usdt_save = save_balance['totalAmountInUSDT']
         locked_stake_usdt, locked_stake_btc = get_binance_locked_stacking()
         flex_defi_stake_usdt, flex_defi_stake_btc = get_binance_flex_defi_stacking()
+        locked_defi_stake_usdt, locked_defi_stake_btc = get_binance_locked_defi_stacking()
         asset_list, spot_usdt, spot_btc = get_wallet_assets(info)
         for index, row in asset_list.iterrows():
             asset = row['asset']
@@ -105,10 +107,8 @@ class UpdateWalletAssetView(CreateView):
         usdt_tot = float(usdt_save) + float(spot_usdt) + float(locked_stake_usdt)
         btc_tot = float(btc_save) + float(spot_btc) + float(locked_stake_btc)
 
-
-
-        usdt_stake = locked_stake_usdt + flex_defi_stake_usdt
-        btc_stake = locked_stake_btc + flex_defi_stake_btc
+        usdt_stake = locked_stake_usdt + flex_defi_stake_usdt + locked_defi_stake_usdt
+        btc_stake = locked_stake_btc + flex_defi_stake_btc + locked_defi_stake_btc
         WalletAssetBalance.objects.create(usdtspot = spot_usdt, btcspot = spot_btc, usdtsav = usdt_save, btcsav = btc_save, 
                 usdtbal = usdt_tot, btcbal = btc_tot, usdtstake = usdt_stake, btcstake = btc_stake )                    
         return redirect(reverse('WalletView'))                      
