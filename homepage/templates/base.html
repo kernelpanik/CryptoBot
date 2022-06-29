@@ -53,18 +53,5 @@
          {% block content %}
          {% endblock content %}
       </div>
-      <script>
-      $(function() {
-         $("#search").autocomplete({
-            source: "{% url 'autocompleteDel' %}",
-            minLength: 2,
-            autoFocus: true
-         });
-         $("#search").autocomplete("option", "position", {
-            my: "top+8",
-            at: "bottom"
-         })
-      });
-      </script>
    </body>
 </html>
