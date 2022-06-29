@@ -76,12 +76,12 @@
 <script>
 // var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
 var xValues = ["{% for x in wallet_asset %}",
-                 
                      "{{ x.asset }}",
-     
                   "{% endfor %}"];
 
-var yValues = [55, 49, 44, 24, 15];
+var yValues = ["{% for x in wallet_asset %}",
+                     "{{ x.ownusdt.normalize }}",
+                  "{% endfor %}"];
 var barColors = [
   "#b91d47",
   "#00aba9",
