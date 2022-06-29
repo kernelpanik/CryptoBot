@@ -71,31 +71,46 @@
       </div>
       <div class="col">
          
+
+
          <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 
+
+
+
 <script>
-// var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-var xValues = ["{% for x in wallet_asset %}",
-                     "{{ x.asset }}",
-                  "{% endfor %}"];
+var xValues = ["{% for x in wallet_asset %}", 
+                  "{{ x.asset }}",
+               "{% endfor %}"];
 
 var yValues = ["{% for x in wallet_asset %}",
                      "{{ x.ownusdt.normalize }}",
                   "{% endfor %}"];
-var barColors = [
-  "#b91d47",
-  "#00aba9",
-  "#2b5797",
-  "#e8c3b9",
-  "#1e7145"
-];
+
+
+function getRandomColor() { //generates random colours and puts them in string
+  var colors = [];
+  for (var i = 0; i < "{{ wallet_asset|length }}"; i++) {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var x = 0; x < 6; x++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    colors.push(color);
+  }
+  return colors;
+}
+
+
+
 
 new Chart("myChart", {
   type: "doughnut",
   data: {
     labels: xValues,
     datasets: [{
-      backgroundColor: barColors,
+      // backgroundColor: barColors,
+      backgroundColor: getRandomColor(),
       data: yValues
     }]
   },
@@ -106,6 +121,31 @@ new Chart("myChart", {
     }
   }
 });
+
+
+
+// entries = xValues.lenght;
+
+// for (i = 0; i < entries; i++) {
+//     r = Math.floor(Math.random() * 200);
+//     g = Math.floor(Math.random() * 200);
+//     b = Math.floor(Math.random() * 200);
+//     v = Math.floor(Math.random() * 500);
+//     c = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+//     h = 'rgb(' + (r+20) + ', ' + (g+20) + ', ' + (b+20) + ')';
+//     data.push( {
+//       value : v,
+//       label : 'item ' + i,
+//       color: c,
+//       highlight: h
+//     }) ;
+// };
+// var options = { } ;
+
+
+    
+
+
 </script>
 
 </body>
