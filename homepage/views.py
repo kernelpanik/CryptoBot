@@ -74,6 +74,9 @@ class WalletView(ListView):
 
     def get(self, request, *args, **kwargs):
         wallet_asset = WalletAssetList.objects.all()
+        # asset_list = WalletAssetList.objects.values_list('asset', flat=True)
+        # asset_list =list(asset_list)
+        # print(list(asset_list))
         wallet_balance = WalletAssetBalance.objects.all()
         context = {"wallet_asset": wallet_asset, "wallet_balance": wallet_balance}
         return render(request, self.template_name, context)

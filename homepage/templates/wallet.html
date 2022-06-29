@@ -42,7 +42,7 @@
    <hr>
    <div class="row">
       <div class="col-8">
-         <div class="row align-items-center overflow-auto" style="margin-top:20px; max-height: 45%">
+         <div class="row align-items-center overflow-auto" style="margin-top:10px; max-height: 45%">
             <table class="table">
                <thead>
                   <tr>
@@ -73,20 +73,26 @@
          
 
 
-      <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-
+      <canvas id="myChart" style="width:100%;max-width:600px; margin-top:10px"></canvas>
 
 <script>
-var xValues = ["{% for x in wallet_asset %}", 
+var resultsX = ["{% for x in wallet_asset %}", 
                   "{{ x.asset }}",
                "{% endfor %}"];
 
-var yValues = ["{% for x in wallet_asset %}",
+var resultsY = ["{% for x in wallet_asset %}",
                      "{{ x.ownusdt.normalize }}",
                   "{% endfor %}"];
 
+var xValues = resultsX.filter(element => {
+  return element !== "";
+});
 
-function getRandomColor() { //generates random colours and puts them in string
+var yValues = resultsY.filter(element => {
+  return element !== "";
+});
+
+function getRandomColor() { 
 var colors = [];
 for (var i = 0; i < "{{ wallet_asset|length }}"; i++) {
    var letters = '0123456789ABCDEF'.split('');
@@ -98,7 +104,6 @@ for (var i = 0; i < "{{ wallet_asset|length }}"; i++) {
 }
 return colors;
 }
-
 
 
 
