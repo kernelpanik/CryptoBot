@@ -73,14 +73,12 @@
          
 
 
-         <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-
-
+      <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 
 
 <script>
 var xValues = ["{% for x in wallet_asset %}", 
-                  "{{ x.asset }}",
+                  "{{ x }}",
                "{% endfor %}"];
 
 var yValues = ["{% for x in wallet_asset %}",
@@ -89,62 +87,38 @@ var yValues = ["{% for x in wallet_asset %}",
 
 
 function getRandomColor() { //generates random colours and puts them in string
-  var colors = [];
-  for (var i = 0; i < "{{ wallet_asset|length }}"; i++) {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var x = 0; x < 6; x++) {
+var colors = [];
+for (var i = 0; i < "{{ wallet_asset|length }}"; i++) {
+   var letters = '0123456789ABCDEF'.split('');
+   var color = '#';
+   for (var x = 0; x < 6; x++) {
       color += letters[Math.floor(Math.random() * 16)];
-    }
-    colors.push(color);
-  }
-  return colors;
+   }
+   colors.push(color);
+}
+return colors;
 }
 
 
 
 
 new Chart("myChart", {
-  type: "doughnut",
-  data: {
-    labels: xValues,
-    datasets: [{
+type: "doughnut",
+data: {
+   labels: xValues,
+   datasets: [{
       // backgroundColor: barColors,
       backgroundColor: getRandomColor(),
       data: yValues
-    }]
-  },
-  options: {
-    title: {
+   }]
+},
+options: {
+   title: {
       display: true,
       text: "Asset USDT balance"
-    }
-  }
+   }
+}
 });
-
-
-
-// entries = xValues.lenght;
-
-// for (i = 0; i < entries; i++) {
-//     r = Math.floor(Math.random() * 200);
-//     g = Math.floor(Math.random() * 200);
-//     b = Math.floor(Math.random() * 200);
-//     v = Math.floor(Math.random() * 500);
-//     c = 'rgb(' + r + ', ' + g + ', ' + b + ')';
-//     h = 'rgb(' + (r+20) + ', ' + (g+20) + ', ' + (b+20) + ')';
-//     data.push( {
-//       value : v,
-//       label : 'item ' + i,
-//       color: c,
-//       highlight: h
-//     }) ;
-// };
-// var options = { } ;
-
-
-    
-
 
 </script>
 
@@ -156,78 +130,5 @@ new Chart("myChart", {
    </div>
    </div>
 
-
-
-
-
-
-
-
-
-
-<!-- <div class="container-fluid" style="margin-top:80px">
-   <div class="row">
-         <form method="POST" action={% url 'UpdateWalletAsset' %}>
-            {% csrf_token %}
-            <button type="submit" id="assetlist"  name="assetlist" class="btn btn-primary btn-lg float-end">Update Asset</button>
-         </form>
-  </div>
-   <div class="row ">
-      <div class="col col-sm-6">
-         <div class="row align-items-center overflow-auto" style="margin-top:30px; max-height: 40%">
-            <div class="col col-sm-2">
-               <h3 class="pull-left"><b>Assets</b></h3>
-            </div>
-            <table class="table">
-               <thead>
-                  <tr>
-                     <th scope="col">#</th>
-                     <th scope="col">Asset</th>
-                     <th scope="col">Free</th>
-                     <th scope="col">Locked</th>
-                     <th scope="col">BTC ₿</th>
-                     <th scope="col">USDT $</th>
-                  </tr>
-               </thead>
-               <tbody>
-                  {% for x in wallet_asset %}
-                  <tr>
-                     <th scope="row">{{ forloop.counter }} </th>
-                     <td>{{ x.asset }}</td>
-                     <td>{{ x.free.normalize }}</td>
-                     <td>{{ x.locked.normalize }}</td>
-                     <td>{{ x.ownbtc.normalize }}</td>
-                     <td>{{ x.ownusdt.normalize }}</td>
-                  </tr>
-                  {% endfor %}
-               </tbody>
-            </table>
-         </div>
-      </div>
-      <div class="col col-sm-6">
-         <div class="row align-items-center overflow-auto" style="margin-top:30px; max-height: 40%">
-            <div class="col col-sm-5">
-               <h3 class="pull-left"><b>Balance</b></h3>
-               Time {{ wallet_balance.last.time }}
-               <br>
-               <br>
-               <h3 class="pull-left"><b>Spot</b></h3>
-               {{ wallet_balance.last.usdtbalance }} USDT
-               <br>
-               {{ wallet_balance.last.btcbalance }} BTC
-               <br>
-               <br>
-               <h3 class="pull-left"><b>Savings</b></h3>
-               0.0 USDT<br>
-               0.0 BTC <br>
-               <br>
-               <h3 class="pull-left"><b>Stake</b></h3>
-               0.0 USDT<br>
-               0.0 BTC <br>
-            </div>
-         </div>   
-      </div>
-   </div>
-</div> -->
 
 {% endblock content %}
