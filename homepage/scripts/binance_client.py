@@ -4,20 +4,36 @@ import pandas as pd
 import datetime as dt
 from binance.exceptions import BinanceAPIException
 import requests
-import json
-import hashlib
 from urllib.parse import urlencode
 import hmac
 from ..models import CoinList, BinanceSymbolList, Ohlcv
 import os
 from sqlalchemy import create_engine
+from django.conf import settings
 
+user = settings.DATABASES['default']['USER']
+password = settings.DATABASES['default']['PASSWORD']
+database_name = settings.DATABASES['default']['NAME']
+host_name = settings.DATABASES['default']['HOST']
 
 api_key = os.getenv("api_key")
 api_secret = os.getenv("api_secret")
 
 # initialize
 client = Client(api_key, api_secret)
+
+
+# DB connection
+database_url = 'mysql+mysqldb://{user}:{password}@{host_name}/{database_name}'.format(
+    user=user,
+    password=password,
+    database_name=database_name,
+    host_name = host_name,
+)
+
+engine = create_engine(database_url, echo=False)
+
+
 
 
 # Get all Binance symbols
@@ -63,14 +79,14 @@ def get_old_ohlcv(slug):
     dfohlcv = D[['date', 'open', 'high', 'low', 'close',
                  'volume', 'num_trades', 'taker_base_vol', 'taker_quote_vol']]
     print(dfohlcv)
-    engine = create_engine('sqlite:///db.sqlite3', echo=False)
-    dfohlcv.to_sql(Ohlcv._meta.db_table,
-                           if_exists='append', con=engine, index=False)    
-
+    # engine = create_engine('sqlite:///db.sqlite3', echo=False)
+    # dfohlcv.to_sql(Ohlcv._meta.db_table,
+    #                        if_exists='append', con=engine, index=False)    
+    dfohlcv.to_sql(Ohlcv._meta.db_table, con=engine, if_exists='append', index=False)
 
     # Ohlcv.objects.update_or_create( \
     #             defaults={'free': free, 'locked': locked, \
     #             'ownusdt': ownusdt, 'ownbtc': ownbtc}, \
     #             asset=asset )                       
 
-    return True, dfohlcv
+    return True
