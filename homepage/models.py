@@ -40,7 +40,7 @@ class Wallet(models.Model):
 
 
 class WalletAssetList(models.Model):
-    time = models.TimeField(auto_now=True, primary_key=True)
+    time = models.DateTimeField(auto_now=True, null=True)
     asset =  models.CharField(max_length=15)
     free = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
     locked = models.DecimalField(max_digits=36, decimal_places=18, default=0.0)
@@ -52,7 +52,7 @@ class WalletAssetList(models.Model):
 
 
 class WalletAssetBalance(models.Model):
-    time = models.DateTimeField(auto_now=True, primary_key=True)
+    time = models.DateTimeField(auto_now=True, null=True)
     usdtbal = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
     btcbal = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
     usdtspot = models.DecimalField(max_digits=19, decimal_places=8, default=0.0)
@@ -78,7 +78,7 @@ class CryptoBotSettings(models.Model):
 
 class Ohlcv(models.Model):
     coin = models.OneToOneField(CoinList,on_delete=models.CASCADE, null=True)
-    date = models.DateTimeField(default=timezone.now, primary_key=True)
+    date = models.DateTimeField(default=timezone.now)
     open = models.DecimalField(max_digits=36, decimal_places=18, null=True)
     high = models.DecimalField(max_digits=36, decimal_places=18, null=True)
     low = models.DecimalField(max_digits=36, decimal_places=18, null=True)
