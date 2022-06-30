@@ -49,7 +49,7 @@ def get_old_ohlcv(slug):
     #     status = False  
 
     past_days = 20
-    client = Client()
+    # client = Client()
     interval = '1h'
     start_str = str(
         (pd.to_datetime('today')-pd.Timedelta(str(past_days)+' days')).date())
