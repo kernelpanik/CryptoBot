@@ -2,8 +2,6 @@
 
 {% block content %}
 
-
-
 <div class="container-fluid" style="margin-top:80px">
    <div class="row">
      <div class="col">
@@ -70,72 +68,57 @@
          </div>
       </div>
       <div class="col">
-         
+         <canvas id="usdtAssetChart" style="width:100%;max-width:600px; margin-top:10px"></canvas>
+            <script>
+               var resultsX = ["{% for x in wallet_asset %}", "{{ x.asset }}", "{% endfor %}"];
+               var resultsY = ["{% for x in wallet_asset %}", "{{ x.ownusdt.normalize }}", "{% endfor %}"];
+               var xValues = resultsX.filter(element => {
+                  return element !== "";
+               });
+               var yValues = resultsY.filter(element => {
+                  return element !== "";
+               });
 
-
-      <canvas id="myChart" style="width:100%;max-width:600px; margin-top:10px"></canvas>
-
-<script>
-var resultsX = ["{% for x in wallet_asset %}", 
-                  "{{ x.asset }}",
-               "{% endfor %}"];
-
-var resultsY = ["{% for x in wallet_asset %}",
-                     "{{ x.ownusdt.normalize }}",
-                  "{% endfor %}"];
-
-var xValues = resultsX.filter(element => {
-  return element !== "";
-});
-
-var yValues = resultsY.filter(element => {
-  return element !== "";
-});
-
-function getRandomColor() { 
-var colors = [];
-for (var i = 0; i < "{{ wallet_asset|length }}"; i++) {
-   var letters = '0123456789ABCDEF'.split('');
-   var color = '#';
-   for (var x = 0; x < 6; x++) {
-      color += letters[Math.floor(Math.random() * 16)];
-   }
-   colors.push(color);
-}
-return colors;
-}
-
-
-
-new Chart("myChart", {
-type: "doughnut",
-data: {
-   labels: xValues,
-   datasets: [{
-      // backgroundColor: barColors,
-      backgroundColor: getRandomColor(),
-      data: yValues
-   }]
-},
-   options: {
-        plugins: {
-            title: {
-                display: true,
-                text: 'Asset USDT Balance'
-            }
-        }
-    }
-});
-
-</script>
-
-</body>
-
-
-
+               function getRandomColor() {
+                  var colors = [];
+                  for(var i = 0; i < "{{ wallet_asset|length }}"; i++) {
+                     var letters = '0123456789ABCDEF'.split('');
+                     var color = '#';
+                     for(var x = 0; x < 6; x++) {
+                        color += letters[Math.floor(Math.random() * 16)];
+                     }
+                     colors.push(color);
+                  }
+                  return colors;
+               }
+               new Chart("usdtAssetChart", {
+                  type: "doughnut",
+                  data: {
+                     labels: xValues,
+                     datasets: [{
+                        // backgroundColor: barColors,
+                        backgroundColor: getRandomColor(),
+                        data: yValues
+                     }]
+                  },
+                  options: {
+                     plugins: {
+                        title: {
+                           display: true,
+                           text: 'Asset USDT Balance'
+                        }
+                     }
+                  }
+               });
+            </script>
       </div>
+      test  1
    </div>
-   </div>
+   test2
+      <hr>
+
+      test 
+</div>
 
 
 {% endblock content %}
