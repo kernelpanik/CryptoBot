@@ -77,7 +77,7 @@ class CryptoBotSettings(models.Model):
 
 
 class Ohlcv(models.Model):
-#    coin = models.OneToOneField(CoinList,on_delete=models.CASCADE, null=True)
+    coin = models.OneToOneField(CoinList,on_delete=models.CASCADE, null=True)
     date = models.DateTimeField(default=timezone.now)
     open = models.DecimalField(max_digits=36, decimal_places=18, null=True)
     high = models.DecimalField(max_digits=36, decimal_places=18, null=True)
