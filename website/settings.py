@@ -105,7 +105,6 @@ DATABASES = {
 }
 }
 
-DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

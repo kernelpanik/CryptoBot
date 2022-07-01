@@ -171,6 +171,7 @@ def autocompleteAdd(request):
     queryset = BinanceSymbolList.objects.filter(symbol__icontains=query_original)
     mylist = []
     mylist += [x.symbol for x in queryset]
+    mylist = sorted(mylist)
     return JsonResponse(mylist, safe=False)
 
 
@@ -179,6 +180,7 @@ def autocompleteDel(request):
     queryset = CoinList.objects.filter(coin__icontains=query_original)
     mylist = []
     mylist += [x.coin for x in queryset]
+    mylist = sorted(mylist)
     return JsonResponse(mylist, safe=False)
    
 
