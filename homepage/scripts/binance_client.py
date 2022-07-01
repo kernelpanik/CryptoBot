@@ -78,10 +78,11 @@ def get_old_ohlcv(slug):
         dt.datetime.fromtimestamp(x/1000) for x in D.open_time]
     dfohlcv = D[['date', 'open', 'high', 'low', 'close',
                  'volume', 'num_trades', 'taker_base_vol', 'taker_quote_vol']]
+    D['coin_id'] = slug
+    dfohlcv = D[['date', 'open', 'high', 'low', 'close',
+                 'volume', 'num_trades', 'taker_base_vol', 'taker_quote_vol', 'coin_id']]
     print(dfohlcv)
-    # engine = create_engine('sqlite:///db.sqlite3', echo=False)
-    # dfohlcv.to_sql(Ohlcv._meta.db_table,
-    #                        if_exists='append', con=engine, index=False)    
+   
     dfohlcv.to_sql(Ohlcv._meta.db_table, con=engine, if_exists='append', index=False)
 
     # Ohlcv.objects.update_or_create( \
