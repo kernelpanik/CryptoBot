@@ -1,6 +1,36 @@
 {% extends 'homepage.html' %}
 {% block crypto_detail %}
 
+<script>
+// 1
+const indexedDB =
+  window.indexedDB ||
+  window.mozIndexedDB ||
+  window.webkitIndexedDB ||
+  window.msIndexedDB ||
+  window.shimIndexedDB;
+
+if (!indexedDB) {
+  console.log("IndexedDB could not be found in this browser.");
+}
+
+// 2
+const request = indexedDB.open("CryptoChart", 1);
+
+request.onerror = function (event) {
+  console.error("An error occurred with IndexedDB");
+  console.error(event);
+};
+
+</script>
+
+
+
+
+
+
+
+
 <style>
 .tradingview-widget-container div div {
    height: 600px !important;
