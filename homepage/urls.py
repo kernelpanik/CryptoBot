@@ -13,7 +13,8 @@ from .views import (
     autocompleteAdd,
     autocompleteDel,
     SearchResults,
-    GetOldOhlcvView
+    GetOldOhlcvView,
+    StartWebSocketView
 )
 
 
@@ -31,5 +32,9 @@ urlpatterns = [
     path('autocompleteDel', views.autocompleteDel, name='autocompleteDel'),
     path("dashboard/<slug:slug>/", CryptoDetailView.as_view(), name="CryptoDetails"),
     path("search/<str:search>/", views.SearchResults, name= "SearchResults"),
-    path("dashboard/<str:asset>/get-old-ohlcv/", GetOldOhlcvView.as_view(), name="GetOldOhlcv")
+    path("dashboard/<str:asset>/get-old-ohlcv/", GetOldOhlcvView.as_view(), name="GetOldOhlcv"),
+    path("dashboard/<str:asset>/start-websocket/", StartWebSocketView.as_view(), name="StartWebSocket")
 ]
+
+
+

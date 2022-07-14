@@ -73,10 +73,9 @@
           <br />
         </div>
         <div class="row">
-        <form method="POST" action={% url 'GetOldOhlcv' asset=asset  %}>
-          <!-- <form method="POST" action={% url 'GetOldOhlcv' asset="object.coin"  %}> -->
+        <form method="POST" action={% url 'StartWebSocket' asset=asset  %}>
           {% csrf_token %}
-          <button type="submit" id="getdata" name="getdata" class="btn btn-primary btn-sm float-left">Start websocket</button>
+          <button type="submit" id="websocket" name="websocket" class="btn btn-primary btn-sm float-left">Start websocket</button>
           </form> 
       </div>
       <div class="row">

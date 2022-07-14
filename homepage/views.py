@@ -6,6 +6,7 @@ from .forms import CoinListAdd, CoinListDelForm, UpdateBnSymbol, UpdateWalletAss
 from .scripts.binance_client import get_binance_symbol, get_old_ohlcv
 from .scripts.wallet import get_wallet_assets, get_binance_savings, get_binance_locked_stacking, \
 get_binance_flex_defi_stacking, get_binance_locked_defi_stacking, info
+from .scripts.binance_websocket import websocket_kline
 from django.http import JsonResponse
 import datetime
 from django.conf import settings
@@ -279,3 +280,19 @@ class GetOldOhlcvView(CreateView):
         )
 
         #return redirect('CryptoDetails', slug=slug) 
+
+
+    class StartWebSocketView(CreateView):
+        model = Ohlcv
+        template_name = "detail.html"
+
+        def post(self, request, **kwargs):
+            slug = self.kwargs['asset']
+            websocket_kline(slug)
+            asset = slug
+            context = {
+            "asset": asset 
+            }
+            return render(
+                request, self.template_name, context
+                )
