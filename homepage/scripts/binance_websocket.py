@@ -3,6 +3,9 @@ from binance import ThreadedWebsocketManager
 import os
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+import asyncio
+
+
 
 # channel_layer = get_channel_layer()
 
@@ -17,8 +20,8 @@ api_key = os.getenv("api_key")
 api_secret = os.getenv("api_secret")
 
 
-def websocket_kline():
-    symbol = 'BNBUSDT'
+def websocket_kline(slug):
+    symbol = slug
     twm = ThreadedWebsocketManager(api_key=api_key, api_secret=api_secret)
     # start is required to initialise its internal loop
     twm.start()
@@ -38,6 +41,7 @@ def websocket_kline():
     # twm.start_multiplex_socket(callback=handle_socket_message, streams=streams)
 
     twm.join()
+    websocket_kline()
 
 if __name__ == "__websocket_kline__":
    websocket_kline()
