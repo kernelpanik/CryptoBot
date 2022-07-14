@@ -1,36 +1,6 @@
 {% extends 'homepage.html' %}
 {% block crypto_detail %}
 
-<script>
-// 1
-const indexedDB =
-  window.indexedDB ||
-  window.mozIndexedDB ||
-  window.webkitIndexedDB ||
-  window.msIndexedDB ||
-  window.shimIndexedDB;
-
-if (!indexedDB) {
-  console.log("IndexedDB could not be found in this browser.");
-}
-
-// 2
-const request = indexedDB.open("CryptoChart", 1);
-
-request.onerror = function (event) {
-  console.error("An error occurred with IndexedDB");
-  console.error(event);
-};
-
-</script>
-
-
-
-
-
-
-
-
 <style>
 .tradingview-widget-container div div {
    height: 600px !important;
@@ -54,8 +24,8 @@ request.onerror = function (event) {
 }
   </script>
 </div>
-<!-- TradingView Widget END -->
       </div>
+      <!-- TradingView Widget END -->
       <div class="col">
 
 
@@ -99,8 +69,22 @@ request.onerror = function (event) {
 
 
       <div class="col">
-        Column
+        <div class="row">
+          <br />
+        </div>
+        <div class="row">
+        <form method="POST" action={% url 'GetOldOhlcv' asset=asset  %}>
+          <!-- <form method="POST" action={% url 'GetOldOhlcv' asset="object.coin"  %}> -->
+          {% csrf_token %}
+          <button type="submit" id="getdata" name="getdata" class="btn btn-primary btn-sm float-left">Start websocket</button>
+          </form> 
       </div>
+      <div class="row">
+      </div>
+
+
+
+
     </div>
   </div>
 
