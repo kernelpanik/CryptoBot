@@ -282,17 +282,19 @@ class GetOldOhlcvView(CreateView):
         #return redirect('CryptoDetails', slug=slug) 
 
 
-    class StartWebSocketView(CreateView):
-        model = Ohlcv
-        template_name = "detail.html"
+class StartWebSocketView(CreateView):
+    model = Ohlcv
+    template_name = "detail.html"
 
-        def post(self, request, **kwargs):
-            slug = self.kwargs['asset']
-            websocket_kline(slug)
-            asset = slug
-            context = {
-            "asset": asset 
-            }
-            return render(
-                request, self.template_name, context
-                )
+    def post(self, request, **kwargs):
+        slug = self.kwargs['asset']
+        websocket_kline(slug)
+        asset = slug
+        context = {
+        "asset": asset 
+        }
+        return render(
+            request, self.template_name, context
+            )
+
+
