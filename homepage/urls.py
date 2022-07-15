@@ -34,7 +34,9 @@ urlpatterns = [
     path("search/<str:search>/", views.SearchResults, name= "SearchResults"),
     path("dashboard/<str:asset>/get-old-ohlcv/", GetOldOhlcvView.as_view(), name="GetOldOhlcv"),
     path("dashboard/<str:asset>/start-websocket/", StartWebSocketView.as_view(), name="StartWebSocket")
+#    path("dashboard/<str:asset>/start-websocket/", views.StartWebSocketView, name="StartWebSocket")
 ]
+
 
 
 

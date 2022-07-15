@@ -6,10 +6,7 @@ from asgiref.sync import async_to_sync
 import asyncio
 from binance import AsyncClient, BinanceSocketManager
 from binance.enums import *
-
-
-
-
+from binance.client import Client
 
 # channel_layer = get_channel_layer()
 
@@ -20,8 +17,6 @@ from binance.enums import *
 #                        "event": "New Price",
 #                        "text": price})
 
-api_key = os.getenv("api_key")
-api_secret = os.getenv("api_secret")
 
 
 # def websocket_kline(slug):
@@ -48,21 +43,46 @@ api_secret = os.getenv("api_secret")
 #     loop = asyncio.get_event_loop()
 #     loop.run_until_complete(websocket_kline(slug))
 
+api_key = os.getenv("api_key")
+api_secret = os.getenv("api_secret")
+
+
+# client = Client(api_key, api_secret)
+
+
+# async def websocket_kline(slug):
+#     client = Client(api_key, api_secret)
+#     bsm = BinanceSocketManager(client)
+#     socket = bsm.trade_socket('BTCUSDT')
+#     print("here")
+#     await socket.__aenter__()
+#     msg = await socket.recv()
+#     print(msg)
+
+
+
+def websocket_kline(slug):
+    client = Client(api_key, api_secret)
+    bsm = BinanceSocketManager(client)
+    socket = bsm.trade_socket('BTCUSDT')
+    print("here")
 
 
 
 
-async def websocket_kline(slug):
-    client = await AsyncClient.create()
-    bm = BinanceSocketManager(client)
-    # start any sockets here, i.e a trade socket
-    ts = bm.kline_socket('BNBBTC', interval=KLINE_INTERVAL_30MINUTE)
-    print(ts)
-    # then start receiving messages
-    async with ts as tscm:
-        while True:
-            res = await tscm.recv()
-            print(res)
+
+
+# async def websocket_kline(slug):
+#     client = await AsyncClient.create()
+#     bm = BinanceSocketManager(client)
+#     # start any sockets here, i.e a trade socket
+#     ts = bm.kline_socket('BNBBTC', interval=KLINE_INTERVAL_30MINUTE)
+#     print(ts)
+#     # then start receiving messages
+#     async with ts as tscm:
+#         while True:
+#             res = await tscm.recv()
+#             print(res)
 
 
   

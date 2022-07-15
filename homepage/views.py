@@ -298,3 +298,11 @@ class StartWebSocketView(CreateView):
             )
 
 
+# def StartWebSocketView(request, **kwargs):
+#     slug = "BTCUSDT"
+#     asset = slug
+#     # websocket_kline(slug)
+#     context = {}
+#     return render(
+#             request, "detail.html", context
+#             )
