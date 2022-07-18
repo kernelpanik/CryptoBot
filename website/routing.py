@@ -1,8 +1,13 @@
 from django.urls import re_path
-
-# from . import consumers
-# from consumers import OhlcvConsumer
 from website.consumers import OhlcvConsumer
+
+
+
+# channel_routing = [
+#     re_path('websocket.connect', ws_connect),
+#     re_path('websocket.disconnect', ws_disconnect),
+# ]
+
 
 
 websocket_urlpatterns = [
