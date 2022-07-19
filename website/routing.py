@@ -12,5 +12,6 @@ from website.consumers import OhlcvConsumer
 
 websocket_urlpatterns = [
     # re_path(r"^(ws/ohlcv/price/)", OhlcvConsumer.as_asgi()),
-    re_path(r"^dashboard/(?P<stream>\w+)/$", OhlcvConsumer.as_asgi()),
+    # re_path(r"^dashboard/(?P<stream>\w+)/$", OhlcvConsumer.as_asgi()),
+    re_path(r"dashboard/ADAUSDT/ohlcv", OhlcvConsumer.as_asgi()),
 ]

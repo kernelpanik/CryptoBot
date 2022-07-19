@@ -165,7 +165,7 @@ socket.onclose = function(e){
 
 
 <script>
-  var socket = new WebSocket('ws://' + window.location.host + '/users/');
+  var socket = new WebSocket('ws://' + '127.0.0.1:8000' + '/dashboard/ADAUSDT/ohlcv');
 
   socket.onopen = function open() {
     console.log('WebSockets connection created.');
