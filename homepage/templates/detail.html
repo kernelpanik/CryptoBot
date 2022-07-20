@@ -165,21 +165,46 @@ socket.onclose = function(e){
 
 
 <script>
+
+number_one=document.getElementById('main')
+
   var endpoint = "ws://127.0.0.1:8000/dashboard/{{ asset|upper }}/ohlcv"
   var socket = new WebSocket(endpoint);
 
-  socket.onopen = function open() {
-    console.log('WebSockets connection created.');
-  };
+  // socket.onopen = function open() {
+  //   console.log('WebSockets connection created.');
+  // };
 
-  if (socket.readyState == WebSocket.OPEN) {
-    socket.onopen();
-  }
+  // if (socket.readyState == WebSocket.OPEN) {
+  //   socket.onopen();
+  // }
+
+  console.log(endpoint)
+
+
+socket.onopen =function(e){
+console.log('open',e)
+socket.send(1)
+}
+
+
+socket.onmessage=function(e){
+console.log('message',e)
+number_one.innerHTML=e.data
+socket.send(1)
+
+}
+
+
+
+
 </script>
 
 
 
 <p id="price">{{ text }}</p>
+<h1 id="main">test</h1>
+
 
 
 

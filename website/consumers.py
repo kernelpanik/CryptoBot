@@ -7,6 +7,8 @@ class OhlcvConsumer(AsyncWebsocketConsumer):
         await self.accept()
         await self.send(text_data="connected")
         await self.channel_layer.group_add("crypto_ohlcv", self.channel_name)
+#        await self.channel_layer.group_add("crypto_ohlcv", "test")
+
         print(f"Added {self.channel_name} channel to crypto_ohlcv")
 
     async def disconnect(self, close_code):
