@@ -185,14 +185,21 @@ number_one=document.getElementById('main')
 
 socket.onopen =function(e){
 console.log('open',e)
-socket.send(1)
+
 }
 
 
 socket.onmessage=function(e){
 console.log('message',e)
 number_one.innerHTML=e.data
-socket.send(1)
+
+}
+
+
+socket.onreceive=function(e){
+console.log('receive',e)
+
+
 
 }
 
