@@ -14,7 +14,7 @@ class OhlcvConsumer(AsyncWebsocketConsumer):
 
         print(f"Added {self.channel_name} channel to crypto_ohlcv")
 
-        for i in range(10):
+        for i in range(100):
             # await self.send({
             #     "type": "websocket.accept",
             #     'text_data':str(i)
